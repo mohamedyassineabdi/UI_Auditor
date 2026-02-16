@@ -1,0 +1,456 @@
+{
+  "startUrl": "https://books.toscrape.com/",
+  "scannedAt": "2026-02-16T11:03:13.945Z",
+  "pages": [
+    {
+      "url": "https://books.toscrape.com/",
+      "depth": 0,
+      "title": "All products | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/index.html",
+      "depth": 1,
+      "title": "All products | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books_1/index.html",
+      "depth": 1,
+      "title": "Books | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_1_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books_1/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/travel_2/index.html",
+      "depth": 1,
+      "title": "Travel | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_travel_2_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/travel_2/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
+      "depth": 1,
+      "title": "Mystery | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_mystery_3_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/mystery_3/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html",
+      "depth": 1,
+      "title": "Historical Fiction | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_historical-fiction_4_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/historical-fiction_4/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/sequential-art_5/index.html",
+      "depth": 1,
+      "title": "Sequential Art | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_sequential-art_5_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/sequential-art_5/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/classics_6/index.html",
+      "depth": 1,
+      "title": "Classics | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_classics_6_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/classics_6/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/philosophy_7/index.html",
+      "depth": 1,
+      "title": "Philosophy | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_philosophy_7_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/philosophy_7/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/romance_8/index.html",
+      "depth": 1,
+      "title": "Romance | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_romance_8_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/romance_8/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/womens-fiction_9/index.html",
+      "depth": 1,
+      "title": "Womens Fiction | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_womens-fiction_9_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/womens-fiction_9/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/fiction_10/index.html",
+      "depth": 1,
+      "title": "Fiction | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_fiction_10_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/fiction_10/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/childrens_11/index.html",
+      "depth": 1,
+      "title": "Childrens | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_childrens_11_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/childrens_11/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/religion_12/index.html",
+      "depth": 1,
+      "title": "Religion | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_religion_12_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/religion_12/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/nonfiction_13/index.html",
+      "depth": 1,
+      "title": "Nonfiction | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_nonfiction_13_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/nonfiction_13/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/music_14/index.html",
+      "depth": 1,
+      "title": "Music | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_music_14_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/music_14/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/default_15/index.html",
+      "depth": 1,
+      "title": "Default | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_default_15_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/default_15/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/science-fiction_16/index.html",
+      "depth": 1,
+      "title": "Science Fiction | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_science-fiction_16_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/science-fiction_16/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/sports-and-games_17/index.html",
+      "depth": 1,
+      "title": "Sports and Games | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_sports-and-games_17_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/sports-and-games_17/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/add-a-comment_18/index.html",
+      "depth": 1,
+      "title": "Add a comment | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_add-a-comment_18_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/add-a-comment_18/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/fantasy_19/index.html",
+      "depth": 1,
+      "title": "Fantasy | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_fantasy_19_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/fantasy_19/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/new-adult_20/index.html",
+      "depth": 1,
+      "title": "New Adult | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_new-adult_20_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/new-adult_20/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/young-adult_21/index.html",
+      "depth": 1,
+      "title": "Young Adult | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_young-adult_21_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/young-adult_21/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/science_22/index.html",
+      "depth": 1,
+      "title": "Science | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_science_22_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/science_22/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/poetry_23/index.html",
+      "depth": 1,
+      "title": "Poetry | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_poetry_23_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/poetry_23/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/paranormal_24/index.html",
+      "depth": 1,
+      "title": "Paranormal | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_paranormal_24_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/paranormal_24/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/art_25/index.html",
+      "depth": 1,
+      "title": "Art | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_art_25_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/art_25/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/psychology_26/index.html",
+      "depth": 1,
+      "title": "Psychology | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_psychology_26_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/psychology_26/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/autobiography_27/index.html",
+      "depth": 1,
+      "title": "Autobiography | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_autobiography_27_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/autobiography_27/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    },
+    {
+      "url": "https://books.toscrape.com/catalogue/category/books/parenting_28/index.html",
+      "depth": 1,
+      "title": "Parenting | Books to Scrape - Sandbox",
+      "screenshot": "output\\screenshots\\books.toscrape.com_catalogue_category_books_parenting_28_index.html.png",
+      "consoleErrors": [
+        "Mixed Content: The page at 'https://books.toscrape.com/catalogue/category/books/parenting_28/index.html' was loaded over HTTPS, but requested an insecure script 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'. This request has been blocked; the content must be served over HTTPS."
+      ],
+      "requestFailures": [
+        {
+          "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+          "failure": "mixed-content"
+        }
+      ]
+    }
+  ]
+}
