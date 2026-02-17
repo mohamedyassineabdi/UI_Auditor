@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "axe-core": "^4.11.1",
+    "express": "^5.2.1",
     "playwright": "^1.58.2"
   }
 }

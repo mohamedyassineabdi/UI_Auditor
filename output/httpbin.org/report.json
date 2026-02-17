@@ -1,0 +1,588 @@
+{
+  "startUrl": "https://httpbin.org/",
+  "domain": "httpbin.org",
+  "scannedAt": "2026-02-17T13:09:19.926Z",
+  "maxPages": 50,
+  "maxDepth": 4,
+  "maxClicksPerPage": 4,
+  "screenshotPolicy": "one_per_page_viewport_only",
+  "outputDir": "output\\httpbin.org",
+  "livePreviewPng": "output\\httpbin.org\\live.png",
+  "pages": [
+    {
+      "url": "https://httpbin.org/",
+      "depth": 0,
+      "title": "httpbin.org",
+      "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org___page.png",
+      "consoleErrors": [],
+      "requestFailures": [
+        {
+          "url": "mailto:me@kennethreitz.org",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "actions": [
+        {
+          "type": "click",
+          "target": {
+            "tag": "a",
+            "text": "View source on Github",
+            "href": "https://github.com/requests/httpbin"
+          },
+          "beforeUrl": "https://httpbin.org/",
+          "afterUrl": null,
+          "urlChanged": false,
+          "skippedBecauseVisited": false,
+          "error": "TimeoutError: locator.waitFor: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button, a[href], [role=\"button\"], input[type=\"button\"], input[type=\"submit\"]').first() to be visible\u001b[22m\n\u001b[2m    17 × locator resolved to hidden <a class=\"github-corner\" aria-label=\"View source on Github\" href=\"https://github.com/requests/httpbin\">…</a>\u001b[22m\n"
+        },
+        {
+          "type": "click",
+          "target": {
+            "tag": "a",
+            "text": "the developer - Website",
+            "href": "https://kennethreitz.org/"
+          },
+          "beforeUrl": "https://httpbin.org/",
+          "afterUrl": "https://httpbin.org/",
+          "urlChanged": false,
+          "skippedBecauseVisited": false,
+          "error": null
+        },
+        {
+          "type": "click",
+          "target": {
+            "tag": "a",
+            "text": "Send email to the developer",
+            "href": "mailto:me@kennethreitz.org"
+          },
+          "beforeUrl": "https://httpbin.org/",
+          "afterUrl": "https://httpbin.org/",
+          "urlChanged": false,
+          "skippedBecauseVisited": false,
+          "error": null
+        },
+        {
+          "type": "click",
+          "target": {
+            "tag": "button",
+            "text": "Expand operation",
+            "href": null
+          },
+          "beforeUrl": "https://httpbin.org/",
+          "afterUrl": "https://httpbin.org/",
+          "urlChanged": false,
+          "skippedBecauseVisited": false,
+          "error": null
+        }
+      ],
+      "issues": [
+        {
+          "ruleId": "a11y:color-contrast",
+          "severity": "high",
+          "message": "Elements must meet minimum color contrast ratio thresholds (serious)",
+          "evidence": {
+            "url": "https://httpbin.org/",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+            "sampleTarget": [
+              ".version"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:heading-order",
+          "severity": "medium",
+          "message": "Heading levels should only increase by one (moderate)",
+          "evidence": {
+            "url": "https://httpbin.org/",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/heading-order?application=playwright",
+            "sampleTarget": [
+              "#operations-tag-HTTP_Methods"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:landmark-one-main",
+          "severity": "medium",
+          "message": "Document should have one main landmark (moderate)",
+          "evidence": {
+            "url": "https://httpbin.org/",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright",
+            "sampleTarget": [
+              "html"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:page-has-heading-one",
+          "severity": "medium",
+          "message": "Page should contain a level-one heading (moderate)",
+          "evidence": {
+            "url": "https://httpbin.org/",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/page-has-heading-one?application=playwright",
+            "sampleTarget": [
+              "html"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:region",
+          "severity": "medium",
+          "message": "All page content should be contained by landmarks (moderate)",
+          "evidence": {
+            "url": "https://httpbin.org/",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/region?application=playwright",
+            "sampleTarget": [
+              ".github-corner"
+            ]
+          }
+        }
+      ],
+      "a11y": {
+        "passes": 26,
+        "incomplete": 1,
+        "inapplicable": 61,
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143",
+              "TTv5",
+              "TT13.c",
+              "EN-301-549",
+              "EN-9.1.4.3",
+              "ACT",
+              "RGAAv4",
+              "RGAA-3.2.1"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  ".version"
+                ],
+                "html": "<pre class=\"version\"><!-- react-text: 29 --> <!-- /react-text --><!-- react-text: 30 -->0.9.2<!-- /react-text --><!-- react-text: 31 --> <!-- /react-text --></pre>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.75 (foreground color: #ffffff, background color: #7d8492, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "target": [
+                  "div:nth-child(3) > div > a[href$=\"kennethreitz.org\"]"
+                ],
+                "html": "<a href=\"https://kennethreitz.org\" target=\"_blank\"><!-- react-text: 43 -->the developer<!-- /react-text --><!-- react-text: 44 --> - Website<!-- /react-text --></a>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.15 (foreground color: #4990e2, background color: #fafafa, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "target": [
+                  "a[href=\"mailto:me@kennethreitz.org\"]"
+                ],
+                "html": "<a href=\"mailto:me@kennethreitz.org\">Send email to the developer</a>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.15 (foreground color: #4990e2, background color: #fafafa, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          },
+          {
+            "id": "heading-order",
+            "impact": "moderate",
+            "description": "Ensure the order of headings is semantically correct",
+            "help": "Heading levels should only increase by one",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/heading-order?application=playwright",
+            "tags": [
+              "cat.semantics",
+              "best-practice"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "#operations-tag-HTTP_Methods"
+                ],
+                "html": "<h4 class=\"opblock-tag\" id=\"operations-tag-HTTP_Methods\">",
+                "failureSummary": "Fix any of the following:\n  Heading order invalid"
+              }
+            ]
+          },
+          {
+            "id": "landmark-one-main",
+            "impact": "moderate",
+            "description": "Ensure the document has a main landmark",
+            "help": "Document should have one main landmark",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright",
+            "tags": [
+              "cat.semantics",
+              "best-practice"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "html"
+                ],
+                "html": "<html lang=\"en\">",
+                "failureSummary": "Fix all of the following:\n  Document does not have a main landmark"
+              }
+            ]
+          },
+          {
+            "id": "page-has-heading-one",
+            "impact": "moderate",
+            "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
+            "help": "Page should contain a level-one heading",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/page-has-heading-one?application=playwright",
+            "tags": [
+              "cat.semantics",
+              "best-practice"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "html"
+                ],
+                "html": "<html lang=\"en\">",
+                "failureSummary": "Fix all of the following:\n  Page must have a level-one heading"
+              }
+            ]
+          },
+          {
+            "id": "region",
+            "impact": "moderate",
+            "description": "Ensure all page content is contained by landmarks",
+            "help": "All page content should be contained by landmarks",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/region?application=playwright",
+            "tags": [
+              "cat.keyboard",
+              "best-practice",
+              "RGAAv4",
+              "RGAA-9.2.1"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  ".github-corner"
+                ],
+                "html": "<a href=\"https://github.com/requests/httpbin\" class=\"github-corner\" aria-label=\"View source on Github\">",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  ".information-container"
+                ],
+                "html": "<div class=\"information-container wrapper\">",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  ".scheme-container"
+                ],
+                "html": "<div class=\"scheme-container\"><section class=\"schemes wrapper block col-12\"><label for=\"schemes\"><span class=\"schemes-title\">Schemes</span><select><option value=\"https\">https</option></select></label></section></div>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "a[href$=\"#/HTTP Methods\"]"
+                ],
+                "html": "<a class=\"nostyle\" href=\"#/HTTP Methods\"><span>HTTP Methods</span></a>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "#operations-tag-HTTP_Methods > small"
+                ],
+                "html": "<small><div class=\"markdown\">Testing different HTTP verbs</div></small>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "a[href$=\"#/Auth\"]"
+                ],
+                "html": "<a class=\"nostyle\" href=\"#/Auth\"><span>Auth</span></a>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "#operations-tag-Auth > small"
+                ],
+                "html": "<small><div class=\"markdown\">Auth methods</div></small>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "a[href$=\"#/Status codes\"]"
+                ],
+                "html": "<a class=\"nostyle\" href=\"#/Status codes\"><span>Status codes</span></a>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "#operations-tag-Status_codes > small"
+                ],
+                "html": "<small><div class=\"markdown\">Generates responses with given status code</div></small>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "a[href$=\"#/Request inspection\"]"
+                ],
+                "html": "<a class=\"nostyle\" href=\"#/Request inspection\"><span>Request inspection</span></a>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              }
+            ]
+          }
+        ]
+      },
+      "a11yError": null
+    },
+    {
+      "url": "https://httpbin.org/forms/post",
+      "depth": 1,
+      "title": "",
+      "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org_forms_post__page.png",
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "requestFailures": [],
+      "actions": [],
+      "issues": [
+        {
+          "ruleId": "a11y:document-title",
+          "severity": "high",
+          "message": "Documents must have <title> element to aid in navigation (serious)",
+          "evidence": {
+            "url": "https://httpbin.org/forms/post",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org_forms_post__page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/document-title?application=playwright",
+            "sampleTarget": [
+              "html"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:html-has-lang",
+          "severity": "high",
+          "message": "<html> element must have a lang attribute (serious)",
+          "evidence": {
+            "url": "https://httpbin.org/forms/post",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org_forms_post__page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+            "sampleTarget": [
+              "html"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:landmark-one-main",
+          "severity": "medium",
+          "message": "Document should have one main landmark (moderate)",
+          "evidence": {
+            "url": "https://httpbin.org/forms/post",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org_forms_post__page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright",
+            "sampleTarget": [
+              "html"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:page-has-heading-one",
+          "severity": "medium",
+          "message": "Page should contain a level-one heading (moderate)",
+          "evidence": {
+            "url": "https://httpbin.org/forms/post",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org_forms_post__page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/page-has-heading-one?application=playwright",
+            "sampleTarget": [
+              "html"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:region",
+          "severity": "medium",
+          "message": "All page content should be contained by landmarks (moderate)",
+          "evidence": {
+            "url": "https://httpbin.org/forms/post",
+            "screenshot": "output\\httpbin.org\\screenshots\\httpbin.org_forms_post__page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/region?application=playwright",
+            "sampleTarget": [
+              "p:nth-child(1)"
+            ]
+          }
+        }
+      ],
+      "a11y": {
+        "passes": 9,
+        "incomplete": 0,
+        "inapplicable": 76,
+        "violations": [
+          {
+            "id": "document-title",
+            "impact": "serious",
+            "description": "Ensure each HTML document contains a non-empty <title> element",
+            "help": "Documents must have <title> element to aid in navigation",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/document-title?application=playwright",
+            "tags": [
+              "cat.text-alternatives",
+              "wcag2a",
+              "wcag242",
+              "TTv5",
+              "TT12.a",
+              "EN-301-549",
+              "EN-9.2.4.2",
+              "ACT",
+              "RGAAv4",
+              "RGAA-8.5.1"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "html"
+                ],
+                "html": "<html>",
+                "failureSummary": "Fix any of the following:\n  Document does not have a non-empty <title> element"
+              }
+            ]
+          },
+          {
+            "id": "html-has-lang",
+            "impact": "serious",
+            "description": "Ensure every HTML document has a lang attribute",
+            "help": "<html> element must have a lang attribute",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+            "tags": [
+              "cat.language",
+              "wcag2a",
+              "wcag311",
+              "TTv5",
+              "TT11.a",
+              "EN-301-549",
+              "EN-9.3.1.1",
+              "ACT",
+              "RGAAv4",
+              "RGAA-8.3.1"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "html"
+                ],
+                "html": "<html>",
+                "failureSummary": "Fix any of the following:\n  The <html> element does not have a lang attribute"
+              }
+            ]
+          },
+          {
+            "id": "landmark-one-main",
+            "impact": "moderate",
+            "description": "Ensure the document has a main landmark",
+            "help": "Document should have one main landmark",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright",
+            "tags": [
+              "cat.semantics",
+              "best-practice"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "html"
+                ],
+                "html": "<html>",
+                "failureSummary": "Fix all of the following:\n  Document does not have a main landmark"
+              }
+            ]
+          },
+          {
+            "id": "page-has-heading-one",
+            "impact": "moderate",
+            "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
+            "help": "Page should contain a level-one heading",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/page-has-heading-one?application=playwright",
+            "tags": [
+              "cat.semantics",
+              "best-practice"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "html"
+                ],
+                "html": "<html>",
+                "failureSummary": "Fix all of the following:\n  Page must have a level-one heading"
+              }
+            ]
+          },
+          {
+            "id": "region",
+            "impact": "moderate",
+            "description": "Ensure all page content is contained by landmarks",
+            "help": "All page content should be contained by landmarks",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/region?application=playwright",
+            "tags": [
+              "cat.keyboard",
+              "best-practice",
+              "RGAAv4",
+              "RGAA-9.2.1"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "p:nth-child(1)"
+                ],
+                "html": "<p><label>Customer name: <input name=\"custname\" style=\"\"></label></p>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "form > p:nth-child(2)"
+                ],
+                "html": "<p><label>Telephone: <input type=\"tel\" name=\"custtel\" style=\"\"></label></p>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "form > p:nth-child(3)"
+                ],
+                "html": "<p><label>E-mail address: <input type=\"email\" name=\"custemail\" style=\"\"></label></p>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "fieldset:nth-child(4)"
+                ],
+                "html": "<fieldset>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "fieldset:nth-child(5)"
+                ],
+                "html": "<fieldset>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "p:nth-child(6)"
+                ],
+                "html": "<p><label>Preferred delivery time: <input type=\"time\" min=\"11:00\" max=\"21:00\" step=\"900\" name=\"delivery\" style=\"\"></label></p>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "p:nth-child(7)"
+                ],
+                "html": "<p><label>Delivery instructions: <textarea name=\"comments\" style=\"\"></textarea></label></p>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              }
+            ]
+          }
+        ]
+      },
+      "a11yError": null
+    }
+  ]
+}

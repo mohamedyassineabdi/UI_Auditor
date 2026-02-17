@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A11y Audit Report - example.com</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
+    header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .summary { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 0; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 10px 12px; }
+    h1 { font-size: 20px; margin: 0; }
+    h2 { font-size: 16px; margin-top: 22px; border-top: 1px solid #eee; padding-top: 16px; }
+    .muted { color: #666; }
+    .count { color: #666; font-weight: normal; }
+    .issue { border: 1px solid #e6e6e6; border-radius: 10px; padding: 12px; margin: 10px 0; }
+    .issue-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .badge { font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 999px; border: 1px solid #ccc; }
+    .badge.high { border-color: #b91c1c; }
+    .badge.medium { border-color: #b45309; }
+    .badge.low { border-color: #1d4ed8; }
+    .rule { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #333; }
+    .issue-msg { margin: 6px 0 10px; }
+    .meta { font-size: 13px; color: #222; display: grid; gap: 6px; }
+    .label { color: #666; }
+    code { background: #f6f6f6; padding: 2px 6px; border-radius: 6px; }
+    a { color: #0b57d0; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .links { margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>A11y Audit Report — example.com</h1>
+    <div class="muted">
+      Scanned: 2026-02-17T13:15:58.852Z · Pages: 1 · A11y issues: 2
+    </div>
+    <div class="summary">
+      <div class="card"><b>High</b><div>0</div></div>
+      <div class="card"><b>Medium</b><div>2</div></div>
+      <div class="card"><b>Low</b><div>0</div></div>
+    </div>
+  </header>
+
+  
+      <section>
+        <h2>High severity <span class="count">(0)</span></h2>
+        <p class="muted">No issues.</p>
+      </section>
+    
+  
+      <section>
+        <h2>Medium severity <span class="count">(2)</span></h2>
+        
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-one-main</span>
+        </div>
+        <div class="issue-msg">Document should have one main landmark (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://example.com/" target="_blank" rel="noopener">https://example.com/</a></div>
+          <div><span class="label">Title:</span> Example Domain</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/example.com___page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://example.com/" target="_blank" rel="noopener">https://example.com/</a></div>
+          <div><span class="label">Title:</span> Example Domain</div>
+          <div><span class="label">Sample target:</span> <code>div</code></div>
+          <div class="links"><a href="screenshots/example.com___page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+      </section>
+    
+  
+      <section>
+        <h2>Low severity <span class="count">(0)</span></h2>
+        <p class="muted">No issues.</p>
+      </section>
+    
+
+</body>
+</html>

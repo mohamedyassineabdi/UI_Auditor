@@ -1,0 +1,527 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Website Accessibility Auditor</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --bg-tertiary: #f0f2f5;
+      --text-primary: #1a1a1a;
+      --text-secondary: #5a5a5a;
+      --text-muted: #8a8a8a;
+      --border-color: #e0e0e0;
+      --accent-color: #0066cc;
+      --accent-hover: #0052a3;
+      --success-color: #10b981;
+      --error-color: #ef4444;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    html.dark-mode {
+      --bg-primary: #1a1a1a;
+      --bg-secondary: #242424;
+      --bg-tertiary: #2d2d2d;
+      --text-primary: #e8e8e8;
+      --text-secondary: #b0b0b0;
+      --text-muted: #808080;
+      --border-color: #404040;
+      --accent-color: #4a9eff;
+      --accent-hover: #3a8eef;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    * { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+
+    html, body { margin: 0; padding: 0; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 20px;
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--bg-secondary);
+    }
+
+    h1 { margin: 0; font-size: 28px; font-weight: 700; }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--bg-tertiary);
+      border-color: var(--accent-color);
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+    .section {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .section h2, .section h3 { margin-top: 0; color: var(--text-primary); }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .url-input-group {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    input#url {
+      flex: 1;
+      padding: 12px 14px;
+      font-size: 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    input#url:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+    }
+
+    button#run, button#cancel {
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    button#run {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    button#run:hover:not(:disabled) {
+      background-color: var(--accent-hover);
+      box-shadow: var(--shadow-md);
+    }
+
+    button#cancel {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    button#cancel:hover:not(:disabled) {
+      background-color: var(--error-color);
+      color: white;
+      border-color: var(--error-color);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge.idle {
+      background-color: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .status-badge.running {
+      background-color: #dbeafe;
+      color: #0369a1;
+      border: 1px solid #0284c7;
+      animation: pulse 2s infinite;
+    }
+
+    html.dark-mode .status-badge.running {
+      background-color: rgba(74, 158, 255, 0.2);
+      color: #4a9eff;
+      border-color: #4a9eff;
+    }
+
+    .status-badge.done {
+      background-color: #dcfce7;
+      color: #167a49;
+      border: 1px solid #10b981;
+    }
+
+    html.dark-mode .status-badge.done {
+      background-color: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border-color: #10b981;
+    }
+
+    .status-badge.error {
+      background-color: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #ef4444;
+    }
+
+    html.dark-mode .status-badge.error {
+      background-color: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border-color: #ef4444;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .status { margin-top: 12px; color: var(--text-secondary); font-size: 14px; }
+
+    .preview-section {
+      background-color: var(--bg-tertiary);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .preview-label {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .preview-hint {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .preview {
+      width: 100%;
+      max-width: 1200px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: block;
+      margin-top: 10px;
+      background-color: var(--bg-primary);
+    }
+
+    iframe {
+      width: 100%;
+      height: 65vh;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-top: 12px;
+      background-color: var(--bg-primary);
+    }
+
+    .muted { color: var(--text-muted); }
+
+    details {
+      margin-top: 12px;
+    }
+
+    details summary {
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--accent-color);
+      padding: 8px;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    details summary:hover {
+      color: var(--accent-hover);
+    }
+
+    details pre {
+      background-color: var(--bg-tertiary);
+      padding: 12px;
+      border-radius: 8px;
+      overflow: auto;
+      max-height: 220px;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .report-section {
+      margin-top: 24px;
+    }
+
+    .report-section h3 {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🔍 Website Accessibility Auditor</h1>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span id="themeIcon">🌙</span>
+    </button>
+  </div>
+
+  <div class="container">
+    <!-- Control Section -->
+    <div class="section">
+      <h2 style="margin-top: 0; margin-bottom: 16px;">Scan Configuration</h2>
+      <div class="controls">
+        <div class="url-input-group">
+          <input id="url" type="url" placeholder="https://example.com" />
+          <button id="run">Run scan</button>
+          <button id="cancel" disabled>Cancel</button>
+        </div>
+        <span class="status-badge idle" id="pill">idle</span>
+      </div>
+      <div class="status" id="status"></div>
+    </div>
+
+    <!-- Live Preview Section -->
+    <div class="section">
+      <h2 style="margin-top: 0;">Live Scanning Preview</h2>
+      <div class="preview-section">
+        <div class="preview-label">Current Page</div>
+        <div class="preview-hint">This image updates while the scanner navigates.</div>
+        <img id="liveImg" class="preview" alt="Live preview will appear here" />
+        <div id="liveHint" class="preview-hint" style="margin-top: 8px;">
+          👈 Start a scan to see the live preview.
+        </div>
+
+        <details>
+          <summary>📋 Show scan logs (optional)</summary>
+          <pre id="logs" class="muted">(no logs yet)</pre>
+        </details>
+      </div>
+    </div>
+
+    <!-- Report Section -->
+    <div class="report-section">
+      <h2>📊 Accessibility Report</h2>
+      <div class="muted" style="margin-bottom: 12px;">The report will appear below when ready.</div>
+      <iframe id="reportFrame" title="Report"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Dark mode toggle
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    const html = document.documentElement;
+
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem("theme") || "light";
+    if (savedTheme === "dark") {
+      html.classList.add("dark-mode");
+      themeIcon.textContent = "☀️";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      html.classList.toggle("dark-mode");
+      const isDark = html.classList.contains("dark-mode");
+      themeIcon.textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+
+    const urlInput = document.getElementById("url");
+    const runBtn = document.getElementById("run");
+    const cancelBtn = document.getElementById("cancel");
+    const statusEl = document.getElementById("status");
+    const frame = document.getElementById("reportFrame");
+    const pill = document.getElementById("pill");
+
+    const logsEl = document.getElementById("logs");
+    const liveImg = document.getElementById("liveImg");
+    const liveHint = document.getElementById("liveHint");
+
+    let es = null;
+    let currentScanId = null;
+
+    let previewTimer = null;
+    let currentLiveUrl = null;
+
+    function setState(state) {
+      pill.textContent = state;
+      pill.className = `status-badge ${state}`;
+    }
+
+    function appendLog(text) {
+      if (logsEl.textContent === "(no logs yet)") logsEl.textContent = "";
+      logsEl.textContent += text;
+      logsEl.scrollTop = logsEl.scrollHeight;
+    }
+
+    function stopStream() {
+      if (es) es.close();
+      es = null;
+    }
+
+    function startPreview(liveUrl) {
+      currentLiveUrl = liveUrl;
+      liveHint.textContent = "Live preview is running.";
+      // refresh immediately
+      liveImg.src = liveUrl + "?t=" + Date.now();
+
+      if (previewTimer) clearInterval(previewTimer);
+      previewTimer = setInterval(() => {
+        // cache-bust so it refreshes
+        liveImg.src = liveUrl + "?t=" + Date.now();
+      }, 700);
+    }
+
+    function stopPreview() {
+      if (previewTimer) clearInterval(previewTimer);
+      previewTimer = null;
+      currentLiveUrl = null;
+    }
+
+    runBtn.onclick = async () => {
+      const url = urlInput.value.trim();
+      stopStream();
+      stopPreview();
+
+      frame.src = "about:blank";
+      logsEl.textContent = "(no logs yet)";
+      liveImg.removeAttribute("src");
+      liveHint.textContent = "Starting…";
+      statusEl.textContent = "Starting scan…";
+      setState("running");
+      cancelBtn.disabled = false;
+
+      try {
+        const r = await fetch("/scan/start", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url }),
+        });
+
+        const data = await r.json();
+        if (!r.ok) {
+          statusEl.textContent = "Failed to start scan.";
+          appendLog(JSON.stringify(data, null, 2) + "\n");
+          setState("error");
+          liveHint.textContent = "No preview.";
+          return;
+        }
+
+        currentScanId = data.scanId;
+        statusEl.textContent = "Scan running…";
+        setState("running");
+        cancelBtn.disabled = false;
+
+        es = new EventSource(`/scan/stream/${currentScanId}`);
+        es.onmessage = (evt) => {
+          const msg = JSON.parse(evt.data);
+
+          if (msg.type === "log") {
+            appendLog(msg.text);
+          }
+
+          if (msg.type === "preview" && msg.liveUrl) {
+            if (currentLiveUrl !== msg.liveUrl) startPreview(msg.liveUrl);
+          }
+
+          if (msg.type === "report" && msg.reportUrl) {
+            statusEl.textContent = "Report ready. Loading…";
+            frame.src = msg.reportUrl;
+          }
+
+          if (msg.type === "status") {
+            if (msg.status === "running") {
+              setState("running");
+            } else if (msg.status === "done") {
+              setState("done");
+              cancelBtn.disabled = true;
+              statusEl.textContent = "✓ Done.";
+              stopStream();
+              // keep preview image frozen on last frame
+              stopPreview();
+              liveHint.textContent = "Preview stopped (scan finished).";
+            } else if (msg.status === "failed") {
+              setState("error");
+              cancelBtn.disabled = true;
+              statusEl.textContent = "✗ Scan failed. (Check logs.)";
+              stopStream();
+              stopPreview();
+              liveHint.textContent = "Preview stopped (scan failed).";
+            } else if (msg.status === "cancelled") {
+              setState("idle");
+              cancelBtn.disabled = true;
+              statusEl.textContent = "⊗ Scan cancelled.";
+              stopStream();
+              stopPreview();
+              liveHint.textContent = "Preview stopped (cancelled).";
+            }
+          }
+        };
+
+        es.onerror = () => {
+          if (pill.textContent === "running") {
+            statusEl.textContent = "Lost connection to live updates. (Scan may still be running.)";
+          }
+          stopStream();
+        };
+      } catch (e) {
+        statusEl.textContent = "Scan failed (network/server error).";
+        appendLog(String(e) + "\n");
+        setState("error");
+        liveHint.textContent = "No preview.";
+      }
+    };
+
+    cancelBtn.onclick = async () => {
+      if (!currentScanId) return;
+      cancelBtn.disabled = true;
+      statusEl.textContent = "Cancelling…";
+      try {
+        await fetch(`/scan/cancel/${currentScanId}`, { method: "POST" });
+      } catch {}
+    };
+  </script>
+</body>
+</html>
