@@ -300,9 +300,11 @@ function generateHtmlReport(report) {
   console.log(`Preview PNG: ${LIVE_PREVIEW_PATH}`);
 
   const browser = await chromium.launch({
-    headless: !SHOW_BROWSER,
-    slowMo: SLOW_MO_MS,
-  });
+  headless: !SHOW_BROWSER,
+  slowMo: SLOW_MO_MS,
+  args: ["--no-sandbox", "--disable-dev-shm-usage"],
+});
+
 
   const context = await browser.newContext({
     viewport: { width: 1280, height: 720 },

@@ -1,0 +1,7 @@
+.git
+.gitignore
+node_modules
+output
+.DS_Store
+npm-debug.log
+yarn-error.log

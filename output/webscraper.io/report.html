@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A11y Audit Report - webscraper.io</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
+    header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .summary { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 0; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 10px 12px; }
+    h1 { font-size: 20px; margin: 0; }
+    h2 { font-size: 16px; margin-top: 22px; border-top: 1px solid #eee; padding-top: 16px; }
+    .muted { color: #666; }
+    .count { color: #666; font-weight: normal; }
+    .issue { border: 1px solid #e6e6e6; border-radius: 10px; padding: 12px; margin: 10px 0; }
+    .issue-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .badge { font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 999px; border: 1px solid #ccc; }
+    .badge.high { border-color: #b91c1c; }
+    .badge.medium { border-color: #b45309; }
+    .badge.low { border-color: #1d4ed8; }
+    .rule { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #333; }
+    .issue-msg { margin: 6px 0 10px; }
+    .meta { font-size: 13px; color: #222; display: grid; gap: 6px; }
+    .label { color: #666; }
+    code { background: #f6f6f6; padding: 2px 6px; border-radius: 6px; }
+    a { color: #0b57d0; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .links { margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>A11y Audit Report — webscraper.io</h1>
+    <div class="muted">
+      Scanned: 2026-02-17T13:46:18.128Z · Pages: 50 · A11y issues: 44
+    </div>
+    <div class="summary">
+      <div class="card"><b>High</b><div>19</div></div>
+      <div class="card"><b>Medium</b><div>22</div></div>
+      <div class="card"><b>Low</b><div>3</div></div>
+    </div>
+  </header>
+
+  
+      <section>
+        <h2>High severity <span class="count">(19)</span></h2>
+        
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:button-name</span>
+        </div>
+        <div class="issue-msg">Buttons must have discernible text (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>iframe, button</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:color-contrast</span>
+        </div>
+        <div class="issue-msg">Elements must meet minimum color contrast ratio thresholds (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>.active &gt; .nav-link[itemprop=&quot;url&quot;] &gt; span[itemprop=&quot;name&quot;]</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:aria-prohibited-attr</span>
+        </div>
+        <div class="issue-msg">Elements must only use permitted ARIA attributes (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/" target="_blank" rel="noopener">https://webscraper.io/</a></div>
+          <div><span class="label">Title:</span> Web Scraper - The #1 web scraping extension</div>
+          <div><span class="label">Sample target:</span> <code>g[clip-path=&quot;url(#__lottie_element_6)&quot;] &gt; g[font-size=&quot;32&quot;][aria-label=&quot;Brown Forest Designer&quot;][font-weight=&quot;700&quot;]</code></div>
+          <div class="links"><a href="screenshots/webscraper.io___page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:color-contrast</span>
+        </div>
+        <div class="issue-msg">Elements must meet minimum color contrast ratio thresholds (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/" target="_blank" rel="noopener">https://webscraper.io/</a></div>
+          <div><span class="label">Title:</span> Web Scraper - The #1 web scraping extension</div>
+          <div><span class="label">Sample target:</span> <code>#landing-chrome-extension &gt; span</code></div>
+          <div class="links"><a href="screenshots/webscraper.io___page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:link-in-text-block</span>
+        </div>
+        <div class="issue-msg">Links must be distinguishable without relying on color (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/" target="_blank" rel="noopener">https://webscraper.io/</a></div>
+          <div><span class="label">Title:</span> Web Scraper - The #1 web scraping extension</div>
+          <div><span class="label">Sample target:</span> <code>#landing-try-test-sites</code></div>
+          <div class="links"><a href="screenshots/webscraper.io___page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:button-name</span>
+        </div>
+        <div class="issue-msg">Buttons must have discernible text (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/cloud-scraper" target="_blank" rel="noopener">https://webscraper.io/cloud-scraper</a></div>
+          <div><span class="label">Title:</span> Web Scraper Cloud | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>iframe, button</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_cloud-scraper__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:color-contrast</span>
+        </div>
+        <div class="issue-msg">Elements must meet minimum color contrast ratio thresholds (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/cloud-scraper" target="_blank" rel="noopener">https://webscraper.io/cloud-scraper</a></div>
+          <div><span class="label">Title:</span> Web Scraper Cloud | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>#free</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_cloud-scraper__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:button-name</span>
+        </div>
+        <div class="issue-msg">Buttons must have discernible text (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/pricing" target="_blank" rel="noopener">https://webscraper.io/pricing</a></div>
+          <div><span class="label">Title:</span> Pricing | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>iframe, button</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_pricing__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:color-contrast</span>
+        </div>
+        <div class="issue-msg">Elements must meet minimum color contrast ratio thresholds (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/pricing" target="_blank" rel="noopener">https://webscraper.io/pricing</a></div>
+          <div><span class="label">Title:</span> Pricing | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>#free</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_pricing__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:button-name</span>
+        </div>
+        <div class="issue-msg">Buttons must have discernible text (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/marketplace" target="_blank" rel="noopener">https://webscraper.io/marketplace</a></div>
+          <div><span class="label">Title:</span> Marketplace | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>iframe[data-cy=&quot;FrameComponent&quot;], button</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_marketplace__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:color-contrast</span>
+        </div>
+        <div class="issue-msg">Elements must meet minimum color contrast ratio thresholds (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/marketplace" target="_blank" rel="noopener">https://webscraper.io/marketplace</a></div>
+          <div><span class="label">Title:</span> Marketplace | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>div[data-domain=&quot;asos.com&quot;] &gt; .card-footer &gt; .card-domain</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_marketplace__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:button-name</span>
+        </div>
+        <div class="issue-msg">Buttons must have discernible text (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/tutorials" target="_blank" rel="noopener">https://webscraper.io/tutorials</a></div>
+          <div><span class="label">Title:</span> Extension intro | Web Scraper How To</div>
+          <div><span class="label">Sample target:</span> <code>iframe[data-cy=&quot;FrameComponent&quot;], button</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_tutorials__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:color-contrast</span>
+        </div>
+        <div class="issue-msg">Elements must meet minimum color contrast ratio thresholds (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/tutorials" target="_blank" rel="noopener">https://webscraper.io/tutorials</a></div>
+          <div><span class="label">Title:</span> Extension intro | Web Scraper How To</div>
+          <div><span class="label">Sample target:</span> <code>.active.category-link[href$=&quot;extension-intro&quot;]</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_tutorials__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:button-name</span>
+        </div>
+        <div class="issue-msg">Buttons must have discernible text (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites" target="_blank" rel="noopener">https://webscraper.io/test-sites</a></div>
+          <div><span class="label">Title:</span> Test Sites | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>iframe, button</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:color-contrast</span>
+        </div>
+        <div class="issue-msg">Elements must meet minimum color contrast ratio thresholds (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites" target="_blank" rel="noopener">https://webscraper.io/test-sites</a></div>
+          <div><span class="label">Title:</span> Test Sites | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>li:nth-child(2) &gt; .install-extension[target=&quot;_blank&quot;][rel=&quot;noopener&quot;]</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:button-name</span>
+        </div>
+        <div class="issue-msg">Buttons must have discernible text (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/computers" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/computers</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>iframe, button</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_computers__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:color-contrast</span>
+        </div>
+        <div class="issue-msg">Elements must meet minimum color contrast ratio thresholds (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/computers" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/computers</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>#side-menu &gt; .nav-item:nth-child(1) &gt; .nav-link[itemprop=&quot;url&quot;] &gt; span[itemprop=&quot;name&quot;]</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_computers__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:button-name</span>
+        </div>
+        <div class="issue-msg">Buttons must have discernible text (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/phones" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/phones</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>iframe, button</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_phones__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:color-contrast</span>
+        </div>
+        <div class="issue-msg">Elements must meet minimum color contrast ratio thresholds (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/phones" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/phones</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>#side-menu &gt; .nav-item:nth-child(1) &gt; .nav-link[itemprop=&quot;url&quot;] &gt; span[itemprop=&quot;name&quot;]</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_phones__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+      </section>
+    
+  
+      <section>
+        <h2>Medium severity <span class="count">(22)</span></h2>
+        
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-one-main</span>
+        </div>
+        <div class="issue-msg">Document should have one main landmark (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-unique</span>
+        </div>
+        <div class="issue-msg">Landmarks should have a unique role or role/label/title (i.e. accessible name) combination (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>#navbar</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>.blog-hero</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/" target="_blank" rel="noopener">https://webscraper.io/</a></div>
+          <div><span class="label">Title:</span> Web Scraper - The #1 web scraping extension</div>
+          <div><span class="label">Sample target:</span> <code>h1</code></div>
+          <div class="links"><a href="screenshots/webscraper.io___page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:heading-order</span>
+        </div>
+        <div class="issue-msg">Heading levels should only increase by one (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/cloud-scraper" target="_blank" rel="noopener">https://webscraper.io/cloud-scraper</a></div>
+          <div><span class="label">Title:</span> Web Scraper Cloud | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>.extract.topsolution.cloud-scraper-intro:nth-child(3) &gt; .container &gt; .row:nth-child(1) &gt; .col-lg-12 &gt; .streamline-subheading</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_cloud-scraper__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/heading-order?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-one-main</span>
+        </div>
+        <div class="issue-msg">Document should have one main landmark (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/cloud-scraper" target="_blank" rel="noopener">https://webscraper.io/cloud-scraper</a></div>
+          <div><span class="label">Title:</span> Web Scraper Cloud | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_cloud-scraper__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/cloud-scraper" target="_blank" rel="noopener">https://webscraper.io/cloud-scraper</a></div>
+          <div><span class="label">Title:</span> Web Scraper Cloud | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>#cloud-scraper &gt; .container &gt; .landing-heading</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_cloud-scraper__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-one-main</span>
+        </div>
+        <div class="issue-msg">Document should have one main landmark (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/pricing" target="_blank" rel="noopener">https://webscraper.io/pricing</a></div>
+          <div><span class="label">Title:</span> Pricing | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_pricing__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/pricing" target="_blank" rel="noopener">https://webscraper.io/pricing</a></div>
+          <div><span class="label">Title:</span> Pricing | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>.container-colored</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_pricing__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:heading-order</span>
+        </div>
+        <div class="issue-msg">Heading levels should only increase by one (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/marketplace" target="_blank" rel="noopener">https://webscraper.io/marketplace</a></div>
+          <div><span class="label">Title:</span> Marketplace | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>div[data-domain=&quot;asos.com&quot;] &gt; .card-header &gt; .card-header-content &gt; h3</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_marketplace__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/heading-order?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-one-main</span>
+        </div>
+        <div class="issue-msg">Document should have one main landmark (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/marketplace" target="_blank" rel="noopener">https://webscraper.io/marketplace</a></div>
+          <div><span class="label">Title:</span> Marketplace | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_marketplace__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/marketplace" target="_blank" rel="noopener">https://webscraper.io/marketplace</a></div>
+          <div><span class="label">Title:</span> Marketplace | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>.marketplace-hero</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_marketplace__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-unique</span>
+        </div>
+        <div class="issue-msg">Landmarks should have a unique role or role/label/title (i.e. accessible name) combination (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/tutorials" target="_blank" rel="noopener">https://webscraper.io/tutorials</a></div>
+          <div><span class="label">Title:</span> Extension intro | Web Scraper How To</div>
+          <div><span class="label">Sample target:</span> <code>#navbar</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_tutorials__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/tutorials" target="_blank" rel="noopener">https://webscraper.io/tutorials</a></div>
+          <div><span class="label">Title:</span> Extension intro | Web Scraper How To</div>
+          <div><span class="label">Sample target:</span> <code>.blog-hero</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_tutorials__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-one-main</span>
+        </div>
+        <div class="issue-msg">Document should have one main landmark (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites" target="_blank" rel="noopener">https://webscraper.io/test-sites</a></div>
+          <div><span class="label">Title:</span> Test Sites | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites" target="_blank" rel="noopener">https://webscraper.io/test-sites</a></div>
+          <div><span class="label">Title:</span> Test Sites | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>.wrapper</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-one-main</span>
+        </div>
+        <div class="issue-msg">Document should have one main landmark (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/computers" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/computers</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_computers__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-unique</span>
+        </div>
+        <div class="issue-msg">Landmarks should have a unique role or role/label/title (i.e. accessible name) combination (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/computers" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/computers</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>#navbar</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_computers__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/computers" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/computers</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>.blog-hero</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_computers__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-one-main</span>
+        </div>
+        <div class="issue-msg">Document should have one main landmark (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/phones" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/phones</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_phones__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-unique</span>
+        </div>
+        <div class="issue-msg">Landmarks should have a unique role or role/label/title (i.e. accessible name) combination (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/phones" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/phones</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>#navbar</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_phones__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-unique?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/test-sites/e-commerce/allinone/phones" target="_blank" rel="noopener">https://webscraper.io/test-sites/e-commerce/allinone/phones</a></div>
+          <div><span class="label">Title:</span> Allinone | Web Scraper Test Sites</div>
+          <div><span class="label">Sample target:</span> <code>.blog-hero</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_test-sites_e-commerce_allinone_phones__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+      </section>
+    
+  
+      <section>
+        <h2>Low severity <span class="count">(3)</span></h2>
+        
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge low">LOW</span>
+          <span class="rule">a11y:empty-heading</span>
+        </div>
+        <div class="issue-msg">Headings should not be empty (minor)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/" target="_blank" rel="noopener">https://webscraper.io/</a></div>
+          <div><span class="label">Title:</span> Web Scraper - The #1 web scraping extension</div>
+          <div><span class="label">Sample target:</span> <code>.btnlm.table-nb.border-0:nth-child(3) &gt; div &gt; .billed-annually</code></div>
+          <div class="links"><a href="screenshots/webscraper.io___page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge low">LOW</span>
+          <span class="rule">a11y:empty-heading</span>
+        </div>
+        <div class="issue-msg">Headings should not be empty (minor)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/cloud-scraper" target="_blank" rel="noopener">https://webscraper.io/cloud-scraper</a></div>
+          <div><span class="label">Title:</span> Web Scraper Cloud | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>.btnlm.table-nb.border-0:nth-child(3) &gt; div &gt; .billed-annually</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_cloud-scraper__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge low">LOW</span>
+          <span class="rule">a11y:empty-heading</span>
+        </div>
+        <div class="issue-msg">Headings should not be empty (minor)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="https://webscraper.io/pricing" target="_blank" rel="noopener">https://webscraper.io/pricing</a></div>
+          <div><span class="label">Title:</span> Pricing | Web Scraper</div>
+          <div><span class="label">Sample target:</span> <code>.btnlm.table-nb.border-0:nth-child(3) &gt; div &gt; .billed-annually</code></div>
+          <div class="links"><a href="screenshots/webscraper.io_pricing__page.png" target="_blank" rel="noopener">Screenshot</a> · <a href="https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+      </section>
+    
+
+</body>
+</html>
