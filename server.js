@@ -22,15 +22,27 @@ function isValidHttpUrl(s) {
   }
 }
 
-// scanId -> { status, logs[], reportUrl, liveUrl, clients:Set(res), child }
+// scanId -> { status, logs[], reportUrl, reportSlidesUrl, reportPdfUrl, reportPptxUrl, liveUrl, clients:Set(res), child }
 const scans = new Map();
 
 function makeScanId() {
   return crypto.randomBytes(8).toString("hex");
 }
 
+function normalizeScanMode(rawMode) {
+  return rawMode === "fast" ? "fast" : "debug";
+}
+
+function eventLine(payloadObj) {
+  return `data: ${JSON.stringify(payloadObj)}\n\n`;
+}
+
+function writeEvent(res, payloadObj) {
+  res.write(eventLine(payloadObj));
+}
+
 function pushEvent(scan, payloadObj) {
-  const line = `data: ${JSON.stringify(payloadObj)}\n\n`;
+  const line = eventLine(payloadObj);
 
   if (payloadObj.type === "log") {
     scan.logs.push(payloadObj.text);
@@ -63,6 +75,7 @@ function fsPathToUrl(p) {
 // Start scan
 app.post("/scan/start", (req, res) => {
   const url = (req.body?.url || "").trim();
+  const mode = normalizeScanMode(req.body?.mode);
   if (!isValidHttpUrl(url)) {
     return res.status(400).json({ error: "Please enter a valid http(s) URL." });
   }
@@ -77,19 +90,23 @@ app.post("/scan/start", (req, res) => {
     status: "running",
     logs: [],
     reportUrl: null,
+    reportSlidesUrl: null,
+    reportPdfUrl: null,
+    reportPptxUrl: null,
     liveUrl: null,
     clients: new Set(),
     child: null,
+    mode,
   };
   scans.set(scanId, scan);
 
-  const child = spawn(process.execPath, [crawlPath, url], {
+  const child = spawn(process.execPath, [crawlPath, url, `--mode=${mode}`], {
     cwd: __dirname,
     shell: false,
   });
   scan.child = child;
 
-  pushEvent(scan, { type: "status", status: "running", scanId });
+  pushEvent(scan, { type: "status", status: "running", scanId, mode });
 
   child.stdout.on("data", (d) => {
     const text = d.toString();
@@ -116,11 +133,44 @@ app.post("/scan/start", (req, res) => {
         pushEvent(scan, { type: "report", reportUrl });
 
         // If preview wasn't detected for some reason, infer it
-        if (!scan.liveUrl) {
+        if (!scan.liveUrl && scan.mode === "debug") {
           const base = reportUrl.replace(/\/report\.html$/, "");
           scan.liveUrl = base + "/live.png";
           pushEvent(scan, { type: "preview", liveUrl: scan.liveUrl });
         }
+      }
+    }
+
+    // Report PPTX: output/<domain>/report.pptx
+    const reportPptxMatch = text.match(/Report PPTX:\s*(.*)\s*/);
+    if (reportPptxMatch) {
+      const reportPptxFsPath = reportPptxMatch[1].trim();
+      const reportPptxUrl = fsPathToUrl(reportPptxFsPath);
+      if (reportPptxUrl) {
+        scan.reportPptxUrl = reportPptxUrl;
+        pushEvent(scan, { type: "reportPptx", reportPptxUrl });
+      }
+    }
+
+    // Report Slides HTML: output/<domain>/report-slides.html
+    const reportSlidesMatch = text.match(/Report Slides HTML:\s*(.*)\s*/);
+    if (reportSlidesMatch) {
+      const reportSlidesFsPath = reportSlidesMatch[1].trim();
+      const reportSlidesUrl = fsPathToUrl(reportSlidesFsPath);
+      if (reportSlidesUrl) {
+        scan.reportSlidesUrl = reportSlidesUrl;
+        pushEvent(scan, { type: "reportSlides", reportSlidesUrl });
+      }
+    }
+
+    // Report Slides PDF: output/<domain>/report-slides.pdf
+    const reportPdfMatch = text.match(/Report Slides PDF:\s*(.*)\s*/);
+    if (reportPdfMatch) {
+      const reportPdfFsPath = reportPdfMatch[1].trim();
+      const reportPdfUrl = fsPathToUrl(reportPdfFsPath);
+      if (reportPdfUrl) {
+        scan.reportPdfUrl = reportPdfUrl;
+        pushEvent(scan, { type: "reportPdf", reportPdfUrl });
       }
     }
   });
@@ -136,7 +186,11 @@ app.post("/scan/start", (req, res) => {
       status: scan.status,
       code,
       reportUrl: scan.reportUrl,
+      reportSlidesUrl: scan.reportSlidesUrl,
+      reportPdfUrl: scan.reportPdfUrl,
+      reportPptxUrl: scan.reportPptxUrl,
       liveUrl: scan.liveUrl,
+      mode: scan.mode,
     });
     closeAllClients(scan);
 
@@ -144,7 +198,7 @@ app.post("/scan/start", (req, res) => {
     setTimeout(() => scans.delete(scanId), 30 * 60 * 1000);
   });
 
-  res.json({ scanId });
+  res.json({ scanId, mode });
 });
 
 // SSE stream endpoint
@@ -161,16 +215,23 @@ app.get("/scan/stream/:scanId", (req, res) => {
 
   // catch-up
   if (scan.logs.length) {
-    pushEvent(scan, { type: "log", stream: "buffer", text: scan.logs.join("") });
+    writeEvent(res, { type: "log", stream: "buffer", text: scan.logs.join("") });
   }
-  pushEvent(scan, {
+  writeEvent(res, {
     type: "status",
     status: scan.status,
     reportUrl: scan.reportUrl,
+    reportSlidesUrl: scan.reportSlidesUrl,
+    reportPdfUrl: scan.reportPdfUrl,
+    reportPptxUrl: scan.reportPptxUrl,
     liveUrl: scan.liveUrl,
+    mode: scan.mode,
   });
-  if (scan.liveUrl) pushEvent(scan, { type: "preview", liveUrl: scan.liveUrl });
-  if (scan.reportUrl) pushEvent(scan, { type: "report", reportUrl: scan.reportUrl });
+  if (scan.liveUrl) writeEvent(res, { type: "preview", liveUrl: scan.liveUrl });
+  if (scan.reportUrl) writeEvent(res, { type: "report", reportUrl: scan.reportUrl });
+  if (scan.reportSlidesUrl) writeEvent(res, { type: "reportSlides", reportSlidesUrl: scan.reportSlidesUrl });
+  if (scan.reportPdfUrl) writeEvent(res, { type: "reportPdf", reportPdfUrl: scan.reportPdfUrl });
+  if (scan.reportPptxUrl) writeEvent(res, { type: "reportPptx", reportPptxUrl: scan.reportPptxUrl });
 
   const keepAlive = setInterval(() => {
     try {
@@ -193,7 +254,7 @@ app.post("/scan/cancel/:scanId", (req, res) => {
   try {
     scan.child?.kill();
     scan.status = "cancelled";
-    pushEvent(scan, { type: "status", status: "cancelled" });
+    pushEvent(scan, { type: "status", status: "cancelled", mode: scan.mode });
     closeAllClients(scan);
   } catch {}
 

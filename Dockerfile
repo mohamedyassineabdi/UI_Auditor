@@ -1,22 +1,22 @@
-FROM mcr.microsoft.com/playwright:v1.49.0-jammy
+FROM mcr.microsoft.com/playwright:v1.58.2-jammy
 
-# Virtual display + VNC + noVNC
-RUN apt-get update && apt-get install -y \
+# Prevent interactive prompts (tzdata)
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    tzdata \
     xvfb fluxbox x11vnc novnc websockify \
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Install deps first for caching
 COPY package*.json ./
-RUN npm install
+RUN npm ci --omit=dev
 
-# Copy the rest of your project
 COPY . .
 
-# Expose:
-# 3000 = your UI
-# 7900 = noVNC in browser
 EXPOSE 3000 7900
-
 CMD ["bash", "start-vnc.sh"]

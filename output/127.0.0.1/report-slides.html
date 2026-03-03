@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A11y Slide Viewer - 127.0.0.1</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-soft: #1f2937;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #60a5fa;
+      --border: #334155;
+      --high: #fecaca;
+      --high-line: #dc2626;
+      --med: #fde68a;
+      --med-line: #d97706;
+      --low: #bfdbfe;
+      --low-line: #2563eb;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(1200px 800px at 20% -10%, #1e293b, var(--bg));
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    .viewport { height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(3px);
+    }
+
+    .toolbar .left { display: flex; align-items: center; gap: 8px; }
+    .brand { font-weight: 700; }
+    .counter { color: var(--muted); font-size: 13px; }
+    .nav { display: flex; align-items: center; gap: 8px; }
+    button {
+      border: 1px solid var(--border);
+      background: var(--panel-soft);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 7px 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .deck {
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      padding: 18px;
+    }
+
+    .slide.active { display: block; }
+
+    .card {
+      height: 100%;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(160deg, rgba(15,23,42,0.95), rgba(30,41,59,0.95));
+      box-shadow: 0 8px 24px rgba(2, 6, 23, 0.35);
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .cover h1 { margin: 0 0 6px; font-size: 30px; }
+    .cover .sub { margin: 0; color: var(--muted); }
+    .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .pill { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; background: rgba(30,41,59,0.75); }
+    .list-wrap { margin-top: 14px; }
+    .list-wrap ul { margin: 8px 0 0 18px; padding: 0; }
+    .list-wrap li { margin: 4px 0; color: var(--muted); }
+
+    .slide-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .obs-id { font-size: 20px; font-weight: 700; }
+    .sev {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+    .sev.high { background: var(--high); border-color: var(--high-line); color: #7f1d1d; }
+    .sev.medium { background: var(--med); border-color: var(--med-line); color: #78350f; }
+    .sev.low { background: var(--low); border-color: var(--low-line); color: #1e3a8a; }
+
+    .slide-body {
+      display: grid;
+      grid-template-columns: 34% 66%;
+      gap: 12px;
+      height: calc(100% - 44px);
+    }
+
+    .meta {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(17, 24, 39, 0.8);
+      padding: 12px;
+      overflow: auto;
+    }
+    .meta h3 { margin: 0 0 8px; font-size: 17px; }
+    .msg { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+    .line { margin: 7px 0; font-size: 13px; display: grid; gap: 3px; }
+    .line span { color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; }
+    .line a { color: var(--accent); text-decoration: none; word-break: break-word; }
+    .line strong { color: var(--text); }
+    .line code { display: inline-block; max-width: 100%; overflow-wrap: anywhere; }
+
+    .shot {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #0b1220;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      overflow: hidden;
+    }
+    .shot img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .empty { color: var(--muted); font-size: 15px; }
+
+    .footer {
+      padding: 8px 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .slide-body { grid-template-columns: 1fr; }
+      .toolbar { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport">
+    <header class="toolbar">
+      <div class="left">
+        <span class="brand">A11y Slide Viewer</span>
+        <span class="counter" id="counter"></span>
+      </div>
+      <div class="nav">
+        <button id="prevBtn" type="button">Previous</button>
+        <button id="nextBtn" type="button">Next</button>
+      </div>
+    </header>
+
+    <main class="deck" id="deck">
+      <section class="slide active">
+        <div class="card cover">
+          <h1>A11y Audit Slides - 127.0.0.1</h1>
+          <p class="sub">Scanned at 2026-03-03T12:17:20.675Z | Mode: fast</p>
+          <div class="stats">
+            <div class="pill"><strong>Observations:</strong> 6</div>
+            <div class="pill"><strong>Pages:</strong> 1</div>
+            <div class="pill"><strong>High:</strong> 3</div>
+            <div class="pill"><strong>Medium:</strong> 2</div>
+            <div class="pill"><strong>Low:</strong> 1</div>
+          </div>
+          <div class="list-wrap">
+            <strong>Top recurring rules</strong>
+            <ul><li>1. <code>a11y:empty-heading</code> - 1 issue(s) on 1 page(s)</li><li>2. <code>a11y:html-has-lang</code> - 1 issue(s) on 1 page(s)</li><li>3. <code>a11y:image-alt</code> - 1 issue(s) on 1 page(s)</li><li>4. <code>a11y:label</code> - 1 issue(s) on 1 page(s)</li><li>5. <code>a11y:landmark-one-main</code> - 1 issue(s) on 1 page(s)</li><li>6. <code>a11y:region</code> - 1 issue(s) on 1 page(s)</li></ul>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="slide">
+        <div class="slide-top">
+          <div class="obs-id">Observation 1</div>
+          <div class="sev high">HIGH</div>
+        </div>
+        <div class="slide-body">
+          <aside class="meta">
+            <h3>a11y:html-has-lang</h3>
+            <p class="msg">&lt;html&gt; element must have a lang attribute (serious)</p>
+            <div class="line"><span>Page</span><a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+            <div class="line"><span>Title</span><strong>A11y Test</strong></div>
+            <div class="line"><span>Target</span><code>html</code></div>
+            <div class="line"><span>Help</span><a href="https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright" target="_blank" rel="noopener">https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright</a></div>
+          </aside>
+          <div class="shot">
+            <img src="screenshots/127.0.0.1_3899___page.png" alt="Observation screenshot 1" loading="lazy" />
+          </div>
+        </div>
+      </section>
+    
+
+      <section class="slide">
+        <div class="slide-top">
+          <div class="obs-id">Observation 2</div>
+          <div class="sev high">HIGH</div>
+        </div>
+        <div class="slide-body">
+          <aside class="meta">
+            <h3>a11y:image-alt</h3>
+            <p class="msg">Images must have alternative text (critical)</p>
+            <div class="line"><span>Page</span><a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+            <div class="line"><span>Title</span><strong>A11y Test</strong></div>
+            <div class="line"><span>Target</span><code>img</code></div>
+            <div class="line"><span>Help</span><a href="https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright" target="_blank" rel="noopener">https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright</a></div>
+          </aside>
+          <div class="shot">
+            <img src="screenshots/127.0.0.1_3899___page.png" alt="Observation screenshot 2" loading="lazy" />
+          </div>
+        </div>
+      </section>
+    
+
+      <section class="slide">
+        <div class="slide-top">
+          <div class="obs-id">Observation 3</div>
+          <div class="sev high">HIGH</div>
+        </div>
+        <div class="slide-body">
+          <aside class="meta">
+            <h3>a11y:label</h3>
+            <p class="msg">Form elements must have labels (critical)</p>
+            <div class="line"><span>Page</span><a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+            <div class="line"><span>Title</span><strong>A11y Test</strong></div>
+            <div class="line"><span>Target</span><code>input</code></div>
+            <div class="line"><span>Help</span><a href="https://dequeuniversity.com/rules/axe/4.11/label?application=playwright" target="_blank" rel="noopener">https://dequeuniversity.com/rules/axe/4.11/label?application=playwright</a></div>
+          </aside>
+          <div class="shot">
+            <img src="screenshots/127.0.0.1_3899___page.png" alt="Observation screenshot 3" loading="lazy" />
+          </div>
+        </div>
+      </section>
+    
+
+      <section class="slide">
+        <div class="slide-top">
+          <div class="obs-id">Observation 4</div>
+          <div class="sev medium">MEDIUM</div>
+        </div>
+        <div class="slide-body">
+          <aside class="meta">
+            <h3>a11y:landmark-one-main</h3>
+            <p class="msg">Document should have one main landmark (moderate)</p>
+            <div class="line"><span>Page</span><a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+            <div class="line"><span>Title</span><strong>A11y Test</strong></div>
+            <div class="line"><span>Target</span><code>html</code></div>
+            <div class="line"><span>Help</span><a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright</a></div>
+          </aside>
+          <div class="shot">
+            <img src="screenshots/127.0.0.1_3899___page.png" alt="Observation screenshot 4" loading="lazy" />
+          </div>
+        </div>
+      </section>
+    
+
+      <section class="slide">
+        <div class="slide-top">
+          <div class="obs-id">Observation 5</div>
+          <div class="sev medium">MEDIUM</div>
+        </div>
+        <div class="slide-body">
+          <aside class="meta">
+            <h3>a11y:region</h3>
+            <p class="msg">All page content should be contained by landmarks (moderate)</p>
+            <div class="line"><span>Page</span><a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+            <div class="line"><span>Title</span><strong>A11y Test</strong></div>
+            <div class="line"><span>Target</span><code>img</code></div>
+            <div class="line"><span>Help</span><a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">https://dequeuniversity.com/rules/axe/4.11/region?application=playwright</a></div>
+          </aside>
+          <div class="shot">
+            <img src="screenshots/127.0.0.1_3899___page.png" alt="Observation screenshot 5" loading="lazy" />
+          </div>
+        </div>
+      </section>
+    
+
+      <section class="slide">
+        <div class="slide-top">
+          <div class="obs-id">Observation 6</div>
+          <div class="sev low">LOW</div>
+        </div>
+        <div class="slide-body">
+          <aside class="meta">
+            <h3>a11y:empty-heading</h3>
+            <p class="msg">Headings should not be empty (minor)</p>
+            <div class="line"><span>Page</span><a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+            <div class="line"><span>Title</span><strong>A11y Test</strong></div>
+            <div class="line"><span>Target</span><code>h1</code></div>
+            <div class="line"><span>Help</span><a href="https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright" target="_blank" rel="noopener">https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright</a></div>
+          </aside>
+          <div class="shot">
+            <img src="screenshots/127.0.0.1_3899___page.png" alt="Observation screenshot 6" loading="lazy" />
+          </div>
+        </div>
+      </section>
+    
+    </main>
+
+    <footer class="footer">
+      Tip: Use Left/Right arrow keys to navigate.
+    </footer>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const counter = document.getElementById("counter");
+    const total = slides.length;
+    let index = 0;
+
+    function updateCounter() {
+      counter.textContent = "Slide " + (index + 1) + " / " + total;
+      prevBtn.disabled = index <= 0;
+      nextBtn.disabled = index >= total - 1;
+    }
+
+    function showSlide(nextIndex) {
+      if (nextIndex < 0 || nextIndex >= total) return;
+      slides[index].classList.remove("active");
+      index = nextIndex;
+      slides[index].classList.add("active");
+      updateCounter();
+      const u = new URL(window.location.href);
+      u.searchParams.set("slide", String(index + 1));
+      history.replaceState(null, "", u);
+    }
+
+    prevBtn.addEventListener("click", () => showSlide(index - 1));
+    nextBtn.addEventListener("click", () => showSlide(index + 1));
+
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "ArrowLeft") showSlide(index - 1);
+      if (ev.key === "ArrowRight") showSlide(index + 1);
+    });
+
+    const fromQuery = Number(new URL(window.location.href).searchParams.get("slide") || "1");
+    if (Number.isFinite(fromQuery) && fromQuery >= 1 && fromQuery <= total) {
+      slides[0].classList.remove("active");
+      index = fromQuery - 1;
+      slides[index].classList.add("active");
+    }
+
+    updateCounter();
+  </script>
+</body>
+</html>

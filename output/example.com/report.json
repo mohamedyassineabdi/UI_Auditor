@@ -1,38 +1,23 @@
 {
   "startUrl": "https://example.com/",
+  "scanMode": "fast",
   "domain": "example.com",
-  "scannedAt": "2026-02-17T13:15:58.852Z",
+  "scannedAt": "2026-03-03T12:11:27.191Z",
   "maxPages": 50,
   "maxDepth": 4,
   "maxClicksPerPage": 4,
   "screenshotPolicy": "one_per_page_viewport_only",
   "outputDir": "output\\example.com",
-  "livePreviewPng": "output\\example.com\\live.png",
+  "livePreviewPng": null,
   "pages": [
     {
       "url": "https://example.com/",
       "depth": 0,
       "title": "Example Domain",
       "screenshot": "output\\example.com\\screenshots\\example.com___page.png",
-      "consoleErrors": [
-        "Failed to load resource: the server responded with a status of 404 ()"
-      ],
+      "consoleErrors": [],
       "requestFailures": [],
-      "actions": [
-        {
-          "type": "click",
-          "target": {
-            "tag": "a",
-            "text": "Learn more",
-            "href": "https://iana.org/domains/example"
-          },
-          "beforeUrl": "https://example.com/",
-          "afterUrl": "https://iana.org/help/example-domains",
-          "urlChanged": true,
-          "skippedBecauseVisited": false,
-          "error": null
-        }
-      ],
+      "actions": [],
       "issues": [
         {
           "ruleId": "a11y:landmark-one-main",
@@ -63,7 +48,7 @@
       ],
       "a11y": {
         "passes": 13,
-        "incomplete": 1,
+        "incomplete": 0,
         "inapplicable": 75,
         "violations": [
           {
@@ -112,5 +97,46 @@
       },
       "a11yError": null
     }
-  ]
+  ],
+  "summary": {
+    "scannedPages": 1,
+    "pageSummaries": [
+      {
+        "url": "https://example.com/",
+        "title": "Example Domain",
+        "depth": 0,
+        "issueCount": 2,
+        "high": 0,
+        "medium": 2,
+        "low": 0,
+        "screenshot": "output\\example.com\\screenshots\\example.com___page.png"
+      }
+    ],
+    "topRecurringIssues": [
+      {
+        "ruleId": "a11y:landmark-one-main",
+        "count": 1,
+        "pagesAffected": 1,
+        "sampleMessage": "Document should have one main landmark (moderate)",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright",
+        "severityCounts": {
+          "high": 0,
+          "medium": 1,
+          "low": 0
+        }
+      },
+      {
+        "ruleId": "a11y:region",
+        "count": 1,
+        "pagesAffected": 1,
+        "sampleMessage": "All page content should be contained by landmarks (moderate)",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/region?application=playwright",
+        "severityCounts": {
+          "high": 0,
+          "medium": 1,
+          "low": 0
+        }
+      }
+    ]
+  }
 }

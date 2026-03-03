@@ -1,0 +1,365 @@
+{
+  "startUrl": "http://127.0.0.1:3899/",
+  "scanMode": "fast",
+  "domain": "127.0.0.1",
+  "scannedAt": "2026-03-03T12:17:20.675Z",
+  "maxPages": 50,
+  "maxDepth": 4,
+  "maxClicksPerPage": 4,
+  "screenshotPolicy": "one_per_page_viewport_only",
+  "outputDir": "output\\127.0.0.1",
+  "livePreviewPng": null,
+  "pages": [
+    {
+      "url": "http://127.0.0.1:3899/",
+      "depth": 0,
+      "title": "A11y Test",
+      "screenshot": "output\\127.0.0.1\\screenshots\\127.0.0.1_3899___page.png",
+      "consoleErrors": [],
+      "requestFailures": [],
+      "actions": [],
+      "issues": [
+        {
+          "ruleId": "a11y:empty-heading",
+          "severity": "low",
+          "message": "Headings should not be empty (minor)",
+          "evidence": {
+            "url": "http://127.0.0.1:3899/",
+            "screenshot": "output\\127.0.0.1\\screenshots\\127.0.0.1_3899___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright",
+            "sampleTarget": [
+              "h1"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:html-has-lang",
+          "severity": "high",
+          "message": "<html> element must have a lang attribute (serious)",
+          "evidence": {
+            "url": "http://127.0.0.1:3899/",
+            "screenshot": "output\\127.0.0.1\\screenshots\\127.0.0.1_3899___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+            "sampleTarget": [
+              "html"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:image-alt",
+          "severity": "high",
+          "message": "Images must have alternative text (critical)",
+          "evidence": {
+            "url": "http://127.0.0.1:3899/",
+            "screenshot": "output\\127.0.0.1\\screenshots\\127.0.0.1_3899___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
+            "sampleTarget": [
+              "img"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:label",
+          "severity": "high",
+          "message": "Form elements must have labels (critical)",
+          "evidence": {
+            "url": "http://127.0.0.1:3899/",
+            "screenshot": "output\\127.0.0.1\\screenshots\\127.0.0.1_3899___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+            "sampleTarget": [
+              "input"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:landmark-one-main",
+          "severity": "medium",
+          "message": "Document should have one main landmark (moderate)",
+          "evidence": {
+            "url": "http://127.0.0.1:3899/",
+            "screenshot": "output\\127.0.0.1\\screenshots\\127.0.0.1_3899___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright",
+            "sampleTarget": [
+              "html"
+            ]
+          }
+        },
+        {
+          "ruleId": "a11y:region",
+          "severity": "medium",
+          "message": "All page content should be contained by landmarks (moderate)",
+          "evidence": {
+            "url": "http://127.0.0.1:3899/",
+            "screenshot": "output\\127.0.0.1\\screenshots\\127.0.0.1_3899___page.png",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/region?application=playwright",
+            "sampleTarget": [
+              "img"
+            ]
+          }
+        }
+      ],
+      "a11y": {
+        "passes": 13,
+        "incomplete": 0,
+        "inapplicable": 71,
+        "violations": [
+          {
+            "id": "empty-heading",
+            "impact": "minor",
+            "description": "Ensure headings have discernible text",
+            "help": "Headings should not be empty",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright",
+            "tags": [
+              "cat.name-role-value",
+              "best-practice"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "h1"
+                ],
+                "html": "<h1></h1>",
+                "failureSummary": "Fix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+              }
+            ]
+          },
+          {
+            "id": "html-has-lang",
+            "impact": "serious",
+            "description": "Ensure every HTML document has a lang attribute",
+            "help": "<html> element must have a lang attribute",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+            "tags": [
+              "cat.language",
+              "wcag2a",
+              "wcag311",
+              "TTv5",
+              "TT11.a",
+              "EN-301-549",
+              "EN-9.3.1.1",
+              "ACT",
+              "RGAAv4",
+              "RGAA-8.3.1"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "html"
+                ],
+                "html": "<html><head><title>A11y Test</title></head><body>\n<h1></h1>\n<img src=\"x\">\n<a href=\"#\">Jump</a>\n<input type=\"text\" style=\"\">\n</body></html>",
+                "failureSummary": "Fix any of the following:\n  The <html> element does not have a lang attribute"
+              }
+            ]
+          },
+          {
+            "id": "image-alt",
+            "impact": "critical",
+            "description": "Ensure <img> elements have alternative text or a role of none or presentation",
+            "help": "Images must have alternative text",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
+            "tags": [
+              "cat.text-alternatives",
+              "wcag2a",
+              "wcag111",
+              "section508",
+              "section508.22.a",
+              "TTv5",
+              "TT7.a",
+              "TT7.b",
+              "EN-301-549",
+              "EN-9.1.1.1",
+              "ACT",
+              "RGAAv4",
+              "RGAA-1.1.1"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "img"
+                ],
+                "html": "<img src=\"x\">",
+                "failureSummary": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+              }
+            ]
+          },
+          {
+            "id": "label",
+            "impact": "critical",
+            "description": "Ensure every form element has a label",
+            "help": "Form elements must have labels",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+            "tags": [
+              "cat.forms",
+              "wcag2a",
+              "wcag412",
+              "section508",
+              "section508.22.n",
+              "TTv5",
+              "TT5.c",
+              "EN-301-549",
+              "EN-9.4.1.2",
+              "ACT",
+              "RGAAv4",
+              "RGAA-11.1.1"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "input"
+                ],
+                "html": "<input type=\"text\" style=\"\">",
+                "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+              }
+            ]
+          },
+          {
+            "id": "landmark-one-main",
+            "impact": "moderate",
+            "description": "Ensure the document has a main landmark",
+            "help": "Document should have one main landmark",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright",
+            "tags": [
+              "cat.semantics",
+              "best-practice"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "html"
+                ],
+                "html": "<html><head><title>A11y Test</title></head><body>\n<h1></h1>\n<img src=\"x\">\n<a href=\"#\">Jump</a>\n<input type=\"text\" style=\"\">\n</body></html>",
+                "failureSummary": "Fix all of the following:\n  Document does not have a main landmark"
+              }
+            ]
+          },
+          {
+            "id": "region",
+            "impact": "moderate",
+            "description": "Ensure all page content is contained by landmarks",
+            "help": "All page content should be contained by landmarks",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/region?application=playwright",
+            "tags": [
+              "cat.keyboard",
+              "best-practice",
+              "RGAAv4",
+              "RGAA-9.2.1"
+            ],
+            "nodes": [
+              {
+                "target": [
+                  "img"
+                ],
+                "html": "<img src=\"x\">",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "a"
+                ],
+                "html": "<a href=\"#\">Jump</a>",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              },
+              {
+                "target": [
+                  "input"
+                ],
+                "html": "<input type=\"text\" style=\"\">",
+                "failureSummary": "Fix any of the following:\n  Some page content is not contained by landmarks"
+              }
+            ]
+          }
+        ]
+      },
+      "a11yError": null
+    }
+  ],
+  "summary": {
+    "scannedPages": 1,
+    "pageSummaries": [
+      {
+        "url": "http://127.0.0.1:3899/",
+        "title": "A11y Test",
+        "depth": 0,
+        "issueCount": 6,
+        "high": 3,
+        "medium": 2,
+        "low": 1,
+        "screenshot": "output\\127.0.0.1\\screenshots\\127.0.0.1_3899___page.png"
+      }
+    ],
+    "topRecurringIssues": [
+      {
+        "ruleId": "a11y:empty-heading",
+        "count": 1,
+        "pagesAffected": 1,
+        "sampleMessage": "Headings should not be empty (minor)",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright",
+        "severityCounts": {
+          "high": 0,
+          "medium": 0,
+          "low": 1
+        }
+      },
+      {
+        "ruleId": "a11y:html-has-lang",
+        "count": 1,
+        "pagesAffected": 1,
+        "sampleMessage": "<html> element must have a lang attribute (serious)",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+        "severityCounts": {
+          "high": 1,
+          "medium": 0,
+          "low": 0
+        }
+      },
+      {
+        "ruleId": "a11y:image-alt",
+        "count": 1,
+        "pagesAffected": 1,
+        "sampleMessage": "Images must have alternative text (critical)",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
+        "severityCounts": {
+          "high": 1,
+          "medium": 0,
+          "low": 0
+        }
+      },
+      {
+        "ruleId": "a11y:label",
+        "count": 1,
+        "pagesAffected": 1,
+        "sampleMessage": "Form elements must have labels (critical)",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+        "severityCounts": {
+          "high": 1,
+          "medium": 0,
+          "low": 0
+        }
+      },
+      {
+        "ruleId": "a11y:landmark-one-main",
+        "count": 1,
+        "pagesAffected": 1,
+        "sampleMessage": "Document should have one main landmark (moderate)",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright",
+        "severityCounts": {
+          "high": 0,
+          "medium": 1,
+          "low": 0
+        }
+      },
+      {
+        "ruleId": "a11y:region",
+        "count": 1,
+        "pagesAffected": 1,
+        "sampleMessage": "All page content should be contained by landmarks (moderate)",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/region?application=playwright",
+        "severityCounts": {
+          "high": 0,
+          "medium": 1,
+          "low": 0
+        }
+      }
+    ]
+  }
+}

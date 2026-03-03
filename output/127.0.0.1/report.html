@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A11y Audit Report - 127.0.0.1</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
+    header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    section { margin-top: 20px; }
+    h1 { font-size: 20px; margin: 0; }
+    h2 { font-size: 16px; margin: 0 0 8px; }
+    .summary { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 10px 12px; min-width: 110px; }
+    .muted { color: #666; }
+    .count { color: #666; font-weight: normal; }
+    .issue { border: 1px solid #e6e6e6; border-radius: 10px; padding: 12px; margin: 10px 0; }
+    .issue-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .badge { font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 999px; border: 1px solid #ccc; }
+    .badge.high { border-color: #b91c1c; }
+    .badge.medium { border-color: #b45309; }
+    .badge.low { border-color: #1d4ed8; }
+    .rule { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #333; }
+    .issue-msg { margin: 6px 0 10px; }
+    .meta { font-size: 13px; color: #222; display: grid; gap: 6px; }
+    .label { color: #666; }
+    code { background: #f6f6f6; padding: 2px 6px; border-radius: 6px; }
+    a { color: #0b57d0; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid #e6e6e6; border-radius: 8px; overflow: hidden; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #efefef; vertical-align: top; font-size: 13px; }
+    th { background: #f8f8f8; font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>A11y Audit Report - 127.0.0.1</h1>
+    <div class="muted">
+      Scanned: 2026-03-03T12:17:20.675Z | Mode: fast | Pages: 1 | A11y issues: 6
+    </div>
+    <div class="summary">
+      <div class="card"><b>High</b><div>3</div></div>
+      <div class="card"><b>Medium</b><div>2</div></div>
+      <div class="card"><b>Low</b><div>1</div></div>
+      <div class="card"><b>Distinct rules</b><div>6</div></div>
+    </div>
+  </header>
+
+  
+      <section>
+        <h2>Top recurring issues</h2>
+        <table>
+                <thead>
+                  <tr>
+                    <th>Rule</th>
+                    <th>Total</th>
+                    <th>Pages</th>
+                    <th>H/M/L</th>
+                    <th>Help</th>
+                  </tr>
+                </thead>
+                <tbody>
+          <tr>
+            <td><code>a11y:empty-heading</code></td>
+            <td>1</td>
+            <td>1</td>
+            <td>0/0/1</td>
+            <td><a href="https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright" target="_blank" rel="noopener">Help</a></td>
+          </tr>
+        
+
+          <tr>
+            <td><code>a11y:html-has-lang</code></td>
+            <td>1</td>
+            <td>1</td>
+            <td>1/0/0</td>
+            <td><a href="https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright" target="_blank" rel="noopener">Help</a></td>
+          </tr>
+        
+
+          <tr>
+            <td><code>a11y:image-alt</code></td>
+            <td>1</td>
+            <td>1</td>
+            <td>1/0/0</td>
+            <td><a href="https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright" target="_blank" rel="noopener">Help</a></td>
+          </tr>
+        
+
+          <tr>
+            <td><code>a11y:label</code></td>
+            <td>1</td>
+            <td>1</td>
+            <td>1/0/0</td>
+            <td><a href="https://dequeuniversity.com/rules/axe/4.11/label?application=playwright" target="_blank" rel="noopener">Help</a></td>
+          </tr>
+        
+
+          <tr>
+            <td><code>a11y:landmark-one-main</code></td>
+            <td>1</td>
+            <td>1</td>
+            <td>0/1/0</td>
+            <td><a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Help</a></td>
+          </tr>
+        
+
+          <tr>
+            <td><code>a11y:region</code></td>
+            <td>1</td>
+            <td>1</td>
+            <td>0/1/0</td>
+            <td><a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Help</a></td>
+          </tr>
+        </tbody>
+              </table>
+      </section>
+    
+  
+      <section>
+        <h2>Pages scanned</h2>
+        <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>Title</th>
+                    <th>Depth</th>
+                    <th>A11y issues</th>
+                    <th>H/M/L</th>
+                    <th>Screenshot</th>
+                  </tr>
+                </thead>
+                <tbody>
+          <tr>
+            <td><a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></td>
+            <td>A11y Test</td>
+            <td>0</td>
+            <td>6</td>
+            <td>3/2/1</td>
+            <td><a href="screenshots/127.0.0.1_3899___page.png" target="_blank" rel="noopener">Screenshot</a></td>
+          </tr>
+        </tbody>
+              </table>
+      </section>
+    
+  
+      <section>
+        <h2>High severity <span class="count">(3)</span></h2>
+        
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:html-has-lang</span>
+        </div>
+        <div class="issue-msg">&lt;html&gt; element must have a lang attribute (serious)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+          <div><span class="label">Title:</span> A11y Test</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/127.0.0.1_3899___page.png" target="_blank" rel="noopener">Screenshot</a> | <a href="https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:image-alt</span>
+        </div>
+        <div class="issue-msg">Images must have alternative text (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+          <div><span class="label">Title:</span> A11y Test</div>
+          <div><span class="label">Sample target:</span> <code>img</code></div>
+          <div class="links"><a href="screenshots/127.0.0.1_3899___page.png" target="_blank" rel="noopener">Screenshot</a> | <a href="https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge high">HIGH</span>
+          <span class="rule">a11y:label</span>
+        </div>
+        <div class="issue-msg">Form elements must have labels (critical)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+          <div><span class="label">Title:</span> A11y Test</div>
+          <div><span class="label">Sample target:</span> <code>input</code></div>
+          <div class="links"><a href="screenshots/127.0.0.1_3899___page.png" target="_blank" rel="noopener">Screenshot</a> | <a href="https://dequeuniversity.com/rules/axe/4.11/label?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+      </section>
+    
+  
+      <section>
+        <h2>Medium severity <span class="count">(2)</span></h2>
+        
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:landmark-one-main</span>
+        </div>
+        <div class="issue-msg">Document should have one main landmark (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+          <div><span class="label">Title:</span> A11y Test</div>
+          <div><span class="label">Sample target:</span> <code>html</code></div>
+          <div class="links"><a href="screenshots/127.0.0.1_3899___page.png" target="_blank" rel="noopener">Screenshot</a> | <a href="https://dequeuniversity.com/rules/axe/4.11/landmark-one-main?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge medium">MEDIUM</span>
+          <span class="rule">a11y:region</span>
+        </div>
+        <div class="issue-msg">All page content should be contained by landmarks (moderate)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+          <div><span class="label">Title:</span> A11y Test</div>
+          <div><span class="label">Sample target:</span> <code>img</code></div>
+          <div class="links"><a href="screenshots/127.0.0.1_3899___page.png" target="_blank" rel="noopener">Screenshot</a> | <a href="https://dequeuniversity.com/rules/axe/4.11/region?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+      </section>
+    
+  
+      <section>
+        <h2>Low severity <span class="count">(1)</span></h2>
+        
+      <div class="issue">
+        <div class="issue-head">
+          <span class="badge low">LOW</span>
+          <span class="rule">a11y:empty-heading</span>
+        </div>
+        <div class="issue-msg">Headings should not be empty (minor)</div>
+        <div class="meta">
+          <div><span class="label">Page:</span> <a href="http://127.0.0.1:3899/" target="_blank" rel="noopener">http://127.0.0.1:3899/</a></div>
+          <div><span class="label">Title:</span> A11y Test</div>
+          <div><span class="label">Sample target:</span> <code>h1</code></div>
+          <div class="links"><a href="screenshots/127.0.0.1_3899___page.png" target="_blank" rel="noopener">Screenshot</a> | <a href="https://dequeuniversity.com/rules/axe/4.11/empty-heading?application=playwright" target="_blank" rel="noopener">Axe help</a></div>
+        </div>
+      </div>
+    
+      </section>
+    
+
+</body>
+</html>

@@ -2,5 +2,5 @@ services:
   auditor:
     build: .
     ports:
-      - "3000:3000"
+      - "3001:3000"
       - "7900:7900"
