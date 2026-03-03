@@ -110,20 +110,60 @@
     .pill.cancelled { border-color: #d3d7de; color: #616977; background: #f1f3f7; }
 
     .muted { color: var(--muted); }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .preview, .vnc-frame, #reportFrame {
+    .vnc-frame, #reportFrame {
       width: 100%;
       border: 1px solid var(--border);
       border-radius: 10px;
       background: #fff;
     }
-    .preview { min-height: 220px; object-fit: contain; }
     .vnc-frame { height: 520px; }
     #reportFrame { height: 68vh; }
+    .vnc-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(9, 16, 30, 0.58);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1100;
+      padding: 18px;
+    }
+    .vnc-modal.open { display: flex; }
+    .vnc-modal-card {
+      width: min(1200px, 96vw);
+      max-height: 94vh;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 14px 40px rgba(8, 25, 46, 0.3);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .vnc-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .vnc-modal-close {
+      border: 1px solid var(--border);
+      background: #f2f4f7;
+      color: #1f2937;
+      border-radius: 8px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .vnc-modal-close:hover { background: #e7edf7; }
+    .vnc-frame-popup {
+      width: 100%;
+      height: min(74vh, 760px);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
     .report-actions {
       display: flex;
       flex-wrap: wrap;
@@ -155,26 +195,10 @@
       color: var(--muted);
       font-size: 13px;
     }
-
-    details { margin-top: 10px; }
-    summary { cursor: pointer; font-weight: 600; color: var(--accent); }
-    pre {
-      margin: 8px 0 0;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: #f4f7fb;
-      max-height: 230px;
-      overflow: auto;
-      font-size: 12px;
-      line-height: 1.35;
-    }
+    .is-hidden { display: none !important; }
 
     @media (max-width: 1120px) {
       .controls {
-        grid-template-columns: 1fr;
-      }
-      .grid {
         grid-template-columns: 1fr;
       }
     }
@@ -205,32 +229,7 @@
       </div>
     </div>
 
-    <div class="panel">
-      <h2>Live Scan</h2>
-      <div class="grid">
-        <div>
-          <div><strong>Live Browser (noVNC)</strong></div>
-          <p id="vncHint" class="muted">Debug mode shows the real browser running in Docker.</p>
-          <iframe id="vncFrame" class="vnc-frame" title="Live Browser"></iframe>
-          <p class="muted">
-            Open directly:
-            <a id="vncLink" href="#" target="_blank" rel="noopener">noVNC tab</a>
-          </p>
-        </div>
-
-        <div>
-          <div><strong>Backup Preview Image</strong></div>
-          <p id="liveHint" class="muted">Start a debug scan to stream `live.png` updates.</p>
-          <img id="liveImg" class="preview" alt="Live preview image" />
-          <details>
-            <summary>Show logs</summary>
-            <pre id="logs" class="muted">(no logs yet)</pre>
-          </details>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel">
+    <div id="reportPanel" class="panel is-hidden">
       <h2>Report</h2>
       <p class="muted">Slide viewer is embedded below once a scan completes. You can still open summary HTML, PDF, and download PPT.</p>
       <div class="report-actions">
@@ -244,6 +243,16 @@
     </div>
   </div>
 
+  <div id="vncModal" class="vnc-modal" aria-hidden="true">
+    <div class="vnc-modal-card">
+      <div class="vnc-modal-head">
+        <strong>Live Browser (noVNC)</strong>
+        <button id="vncModalClose" class="vnc-modal-close" type="button">Hide</button>
+      </div>
+      <iframe id="vncFrame" class="vnc-frame-popup" title="Live Browser"></iframe>
+    </div>
+  </div>
+
   <script>
     const urlInput = document.getElementById("url");
     const modeInput = document.getElementById("mode");
@@ -251,29 +260,25 @@
     const cancelBtn = document.getElementById("cancel");
     const statusEl = document.getElementById("status");
     const pill = document.getElementById("pill");
+    const reportPanel = document.getElementById("reportPanel");
     const reportFrame = document.getElementById("reportFrame");
     const slideReportLink = document.getElementById("slideReportLink");
     const htmlReportLink = document.getElementById("htmlReportLink");
     const pdfReportLink = document.getElementById("pdfReportLink");
     const pptDownloadLink = document.getElementById("pptDownloadLink");
     const reportStatus = document.getElementById("reportStatus");
-    const logsEl = document.getElementById("logs");
-    const liveImg = document.getElementById("liveImg");
-    const liveHint = document.getElementById("liveHint");
     const vncFrame = document.getElementById("vncFrame");
-    const vncHint = document.getElementById("vncHint");
-    const vncLink = document.getElementById("vncLink");
+    const vncModal = document.getElementById("vncModal");
+    const vncModalClose = document.getElementById("vncModalClose");
 
     const noVncBase = `${window.location.protocol}//${window.location.hostname}:7900`;
     const noVncUrl = `${noVncBase}/vnc.html?autoconnect=1&resize=scale`;
     vncFrame.src = noVncUrl;
-    vncLink.href = `${noVncBase}/vnc.html`;
 
     let eventSource = null;
     let currentScanId = null;
+    let currentScanStatus = "idle";
     let currentMode = modeInput.value;
-    let previewTimer = null;
-    let currentLiveUrl = null;
     let currentSlidesUrl = null;
     let currentReportUrl = null;
     let currentPdfUrl = null;
@@ -285,9 +290,8 @@
     }
 
     function appendLog(text) {
-      if (logsEl.textContent === "(no logs yet)") logsEl.textContent = "";
-      logsEl.textContent += text;
-      logsEl.scrollTop = logsEl.scrollHeight;
+      // Live logs are intentionally hidden from the main page.
+      void text;
     }
 
     function closeSse() {
@@ -295,10 +299,32 @@
       eventSource = null;
     }
 
-    function stopPreview() {
-      if (previewTimer) clearInterval(previewTimer);
-      previewTimer = null;
-      currentLiveUrl = null;
+    function setReportPanelVisible(visible) {
+      if (visible) {
+        reportPanel.classList.remove("is-hidden");
+      } else {
+        reportPanel.classList.add("is-hidden");
+      }
+    }
+
+    function updateReportPanelVisibility() {
+      const hasReports = Boolean(currentSlidesUrl || currentReportUrl || currentPdfUrl || currentPptxUrl);
+      const shouldShow = currentScanStatus === "done" && hasReports;
+      setReportPanelVisible(shouldShow);
+    }
+
+    function showVncModal() {
+      vncModal.classList.add("open");
+      vncModal.setAttribute("aria-hidden", "false");
+    }
+
+    function hideVncModal() {
+      vncModal.classList.remove("open");
+      vncModal.setAttribute("aria-hidden", "true");
+    }
+
+    function setVncControlsForScan(isRunning) {
+      if (!isRunning) hideVncModal();
     }
 
     function setLinkState(linkEl, url, enabledText, disabledText, downloadName = null) {
@@ -366,6 +392,7 @@
       currentPptxUrl = null;
       reportFrame.src = "about:blank";
       refreshReportLinks();
+      updateReportPanelVisibility();
     }
 
     function setSlidesReportUrl(url) {
@@ -404,47 +431,37 @@
       });
     }
 
-    function startPreview(liveUrl) {
-      currentLiveUrl = liveUrl;
-      liveImg.src = `${liveUrl}?t=${Date.now()}`;
-      liveHint.textContent = "Backup preview is updating.";
-
-      if (previewTimer) clearInterval(previewTimer);
-      previewTimer = setInterval(() => {
-        liveImg.src = `${liveUrl}?t=${Date.now()}`;
-      }, 700);
-    }
-
     function applyModeUi(mode) {
       currentMode = mode === "fast" ? "fast" : "debug";
-      if (currentMode === "fast") {
-        vncHint.textContent = "Fast mode is headless. noVNC may stay idle.";
-        vncFrame.style.opacity = "0.6";
-        if (!currentLiveUrl) liveHint.textContent = "Backup preview is disabled in fast mode.";
-      } else {
-        vncHint.textContent = "Debug mode shows the real browser running in Docker.";
-        vncFrame.style.opacity = "1";
-        if (!currentLiveUrl) liveHint.textContent = "Start a debug scan to stream live.png updates.";
-      }
     }
 
     modeInput.addEventListener("change", () => applyModeUi(modeInput.value));
     applyModeUi(modeInput.value);
     resetReportUi();
+    setVncControlsForScan(false);
+    setReportPanelVisible(false);
     bindInlineFrameLink(slideReportLink, "Slide viewer");
     bindInlineFrameLink(htmlReportLink, "Summary HTML");
     bindInlineFrameLink(pdfReportLink, "PDF report");
+    vncModalClose.addEventListener("click", hideVncModal);
+    vncModal.addEventListener("click", (ev) => {
+      if (ev.target === vncModal) hideVncModal();
+    });
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape") hideVncModal();
+    });
 
     runBtn.onclick = async () => {
       const url = urlInput.value.trim();
       const mode = modeInput.value === "fast" ? "fast" : "debug";
 
       closeSse();
-      stopPreview();
       resetReportUi();
-      logsEl.textContent = "(no logs yet)";
-      liveImg.removeAttribute("src");
       applyModeUi(mode);
+      setVncControlsForScan(true);
+      showVncModal();
+      currentScanStatus = "running";
+      updateReportPanelVisibility();
 
       setState("running");
       statusEl.textContent = `Starting ${mode} scan...`;
@@ -463,6 +480,9 @@
           statusEl.textContent = "Failed to start scan.";
           appendLog(`${JSON.stringify(data, null, 2)}\n`);
           cancelBtn.disabled = true;
+          setVncControlsForScan(false);
+          currentScanStatus = "failed";
+          updateReportPanelVisibility();
           return;
         }
 
@@ -477,10 +497,6 @@
 
           if (msg.type === "log") appendLog(msg.text || "");
           if (msg.mode) applyModeUi(msg.mode);
-
-          if (msg.type === "preview" && msg.liveUrl) {
-            if (currentLiveUrl !== msg.liveUrl) startPreview(msg.liveUrl);
-          }
 
           if (msg.type === "report" && msg.reportUrl) {
             statusEl.textContent = "Summary HTML report ready.";
@@ -506,11 +522,15 @@
           if (msg.reportPptxUrl) setPptxReportUrl(msg.reportPptxUrl);
 
           if (msg.type === "status") {
+            currentScanStatus = msg.status || currentScanStatus;
             if (msg.status === "running") {
               setState("running");
+              setVncControlsForScan(true);
+              showVncModal();
             } else if (msg.status === "done") {
               setState("done");
               cancelBtn.disabled = true;
+              setVncControlsForScan(false);
               if (currentSlidesUrl && currentPdfUrl && currentPptxUrl) {
                 statusEl.textContent = "Scan finished. Slide viewer, PDF, and PPT are ready.";
               } else if (currentSlidesUrl && currentPptxUrl) {
@@ -523,28 +543,22 @@
                 statusEl.textContent = "Scan finished.";
               }
               closeSse();
-              stopPreview();
-              if (currentMode === "debug") {
-                liveHint.textContent = "Backup preview stopped (scan finished).";
-              } else {
-                liveHint.textContent = "Fast scan finished (no live preview in headless mode).";
-              }
             } else if (msg.status === "failed") {
               setState("failed");
               cancelBtn.disabled = true;
               statusEl.textContent = "Scan failed. Check logs.";
               closeSse();
-              stopPreview();
-              liveHint.textContent = "Preview stopped (scan failed).";
+              setVncControlsForScan(false);
             } else if (msg.status === "cancelled") {
               setState("cancelled");
               cancelBtn.disabled = true;
               statusEl.textContent = "Scan cancelled.";
               closeSse();
-              stopPreview();
-              liveHint.textContent = "Preview stopped (scan cancelled).";
+              setVncControlsForScan(false);
             }
           }
+
+          updateReportPanelVisibility();
         };
 
         eventSource.onerror = () => {
@@ -558,6 +572,9 @@
         cancelBtn.disabled = true;
         statusEl.textContent = "Scan failed (network/server error).";
         appendLog(`${String(error)}\n`);
+        setVncControlsForScan(false);
+        currentScanStatus = "failed";
+        updateReportPanelVisibility();
       }
     };
 
