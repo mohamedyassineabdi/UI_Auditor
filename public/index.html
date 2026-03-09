@@ -4,211 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AI Web Accessibility Auditor</title>
-  <style>
-    :root {
-      --bg: #f7f8fa;
-      --panel: #ffffff;
-      --text: #131722;
-      --muted: #5d6472;
-      --border: #d8dde6;
-      --accent: #0b63ce;
-      --accent-hover: #094ea1;
-      --error: #b42318;
-      --ok: #0d8a4f;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(160deg, #f9fafc, #eef3f9);
-      color: var(--text);
-      line-height: 1.4;
-    }
-
-    .wrap { max-width: 1380px; margin: 0 auto; padding: 20px; }
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(8, 25, 46, 0.08);
-      padding: 18px;
-      margin-bottom: 16px;
-    }
-
-    h1 { margin: 0 0 4px; font-size: 28px; }
-    h2 { margin: 0 0 12px; font-size: 20px; }
-    .sub { color: var(--muted); margin: 0; }
-
-    .controls {
-      display: grid;
-      grid-template-columns: 1fr 220px auto auto;
-      gap: 10px;
-      align-items: center;
-    }
-
-    input, select, button {
-      font: inherit;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      padding: 10px 12px;
-    }
-
-    input, select {
-      background: #fff;
-      color: var(--text);
-    }
-
-    button {
-      cursor: pointer;
-      border: none;
-      font-weight: 600;
-    }
-
-    #run {
-      background: var(--accent);
-      color: #fff;
-    }
-    #run:hover:not(:disabled) { background: var(--accent-hover); }
-
-    #cancel {
-      background: #f2f4f7;
-      color: #1f2937;
-      border: 1px solid var(--border);
-    }
-    #cancel:hover:not(:disabled) {
-      background: #fdecec;
-      color: var(--error);
-      border-color: #e7b6b6;
-    }
-    button:disabled { opacity: 0.6; cursor: not-allowed; }
-
-    .status-row {
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border-radius: 999px;
-      padding: 4px 10px;
-      text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 0.04em;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      background: #f3f5f8;
-    }
-    .pill.running { border-color: #7db1ed; color: #0057b8; background: #ebf4ff; }
-    .pill.done { border-color: #7fd6ab; color: var(--ok); background: #e8f9f0; }
-    .pill.failed { border-color: #eb9d9d; color: var(--error); background: #fff0f0; }
-    .pill.cancelled { border-color: #d3d7de; color: #616977; background: #f1f3f7; }
-
-    .muted { color: var(--muted); }
-    .vnc-frame, #reportFrame {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #fff;
-    }
-    .vnc-frame { height: 520px; }
-    #reportFrame { height: 68vh; }
-    .vnc-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(9, 16, 30, 0.58);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1100;
-      padding: 18px;
-    }
-    .vnc-modal.open { display: flex; }
-    .vnc-modal-card {
-      width: min(1200px, 96vw);
-      max-height: 94vh;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: 0 14px 40px rgba(8, 25, 46, 0.3);
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .vnc-modal-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .vnc-modal-close {
-      border: 1px solid var(--border);
-      background: #f2f4f7;
-      color: #1f2937;
-      border-radius: 8px;
-      padding: 7px 10px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .vnc-modal-close:hover { background: #e7edf7; }
-    .vnc-frame-popup {
-      width: 100%;
-      height: min(74vh, 760px);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #fff;
-    }
-    .report-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 10px 0;
-    }
-    .report-link {
-      display: inline-block;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: #f8fafc;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .report-link:hover {
-      background: #eef4ff;
-      border-color: #b8c8e6;
-    }
-    .report-link.disabled {
-      color: var(--muted);
-      background: #f4f6f8;
-      pointer-events: none;
-    }
-    .report-note {
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .is-hidden { display: none !important; }
-
-    @media (max-width: 1120px) {
-      .controls {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <div class="wrap">
-    <div class="panel">
-      <h1>AI Web Accessibility Auditor</h1>
-      <p class="sub">Playwright + axe-core + live SSE + noVNC</p>
+    <div class="panel hero">
+      <div>
+        <h1>AI Web Accessibility Auditor</h1>
+        <p class="sub">Playwright + axe-core + live SSE + noVNC</p>
+      </div>
+      <button id="themeToggle" type="button" class="theme-toggle" aria-label="Toggle light or dark mode">Dark mode</button>
     </div>
 
     <div class="panel">
@@ -254,6 +59,33 @@
   </div>
 
   <script>
+    const themeToggle = document.getElementById("themeToggle");
+    const themeStorageKey = "auditor-theme";
+
+    function setTheme(theme) {
+      const normalized = theme === "light" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", normalized);
+      document.documentElement.style.colorScheme = normalized;
+      themeToggle.textContent = normalized === "dark" ? "Light mode" : "Dark mode";
+      localStorage.setItem(themeStorageKey, normalized);
+      if (typeof applyThemeToReportViews === "function") applyThemeToReportViews();
+    }
+
+    function initTheme() {
+      const storedTheme = localStorage.getItem(themeStorageKey);
+      if (storedTheme === "light" || storedTheme === "dark") {
+        setTheme(storedTheme);
+        return;
+      }
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setTheme(prefersDark ? "dark" : "light");
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      setTheme(current === "dark" ? "light" : "dark");
+    });
+
     const urlInput = document.getElementById("url");
     const modeInput = document.getElementById("mode");
     const runBtn = document.getElementById("run");
@@ -283,6 +115,25 @@
     let currentReportUrl = null;
     let currentPdfUrl = null;
     let currentPptxUrl = null;
+
+    function getActiveTheme() {
+      return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+    }
+
+    function applyThemeToUrl(url) {
+      if (!url || !/\.html(?:\?|$)/i.test(url)) return url;
+      try {
+        const u = new URL(url, window.location.origin);
+        u.searchParams.set("theme", getActiveTheme());
+        return `${u.pathname}${u.search}${u.hash}`;
+      } catch {
+        return url;
+      }
+    }
+
+    function setReportFrameSource(url) {
+      reportFrame.src = applyThemeToUrl(url);
+    }
 
     function setState(state) {
       pill.textContent = state;
@@ -348,15 +199,18 @@
     }
 
     function refreshReportLinks() {
+      const themedSlidesUrl = applyThemeToUrl(currentSlidesUrl);
+      const themedReportUrl = applyThemeToUrl(currentReportUrl);
+
       setLinkState(
         slideReportLink,
-        currentSlidesUrl,
+        themedSlidesUrl,
         "Open Slide Viewer",
         "Open Slide Viewer"
       );
       setLinkState(
         htmlReportLink,
-        currentReportUrl,
+        themedReportUrl,
         "Open Summary HTML",
         "Open Summary HTML"
       );
@@ -398,14 +252,14 @@
     function setSlidesReportUrl(url) {
       if (!url) return;
       currentSlidesUrl = url;
-      reportFrame.src = url;
+      setReportFrameSource(url);
       refreshReportLinks();
     }
 
     function setHtmlReportUrl(url) {
       if (!url) return;
       currentReportUrl = url;
-      if (!currentSlidesUrl) reportFrame.src = url;
+      if (!currentSlidesUrl) setReportFrameSource(url);
       refreshReportLinks();
     }
 
@@ -426,15 +280,24 @@
         const href = linkEl.getAttribute("href");
         if (!href || linkEl.classList.contains("disabled")) return;
         ev.preventDefault();
-        reportFrame.src = href;
+        setReportFrameSource(href);
         statusEl.textContent = `${label} loaded in the report panel.`;
       });
+    }
+
+    function applyThemeToReportViews() {
+      refreshReportLinks();
+      const frameSrc = reportFrame.getAttribute("src");
+      if (frameSrc && frameSrc !== "about:blank" && /\.html(?:\?|$)/i.test(frameSrc)) {
+        setReportFrameSource(frameSrc);
+      }
     }
 
     function applyModeUi(mode) {
       currentMode = mode === "fast" ? "fast" : "debug";
     }
 
+    initTheme();
     modeInput.addEventListener("change", () => applyModeUi(modeInput.value));
     applyModeUi(modeInput.value);
     resetReportUi();

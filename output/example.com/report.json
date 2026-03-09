@@ -2,7 +2,7 @@
   "startUrl": "https://example.com/",
   "scanMode": "fast",
   "domain": "example.com",
-  "scannedAt": "2026-03-03T12:11:27.191Z",
+  "scannedAt": "2026-03-05T09:10:39.312Z",
   "maxPages": 50,
   "maxDepth": 4,
   "maxClicksPerPage": 4,

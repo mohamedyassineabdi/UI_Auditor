@@ -6,13 +6,21 @@
   <title>A11y Slide Viewer - example.com</title>
   <style>
     :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --panel-soft: #1f2937;
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-      --accent: #60a5fa;
-      --border: #334155;
+      --bg: #edf3ff;
+      --bg-glow: #dbe7ff;
+      --panel: #ffffff;
+      --panel-soft: #eaf1ff;
+      --text: #0f2145;
+      --muted: #4f6792;
+      --accent: #0b57d0;
+      --border: #c4d6f5;
+      --toolbar-bg: rgba(244, 248, 255, 0.92);
+      --card-start: rgba(255, 255, 255, 0.98);
+      --card-end: rgba(235, 243, 255, 0.98);
+      --pill-bg: rgba(236, 244, 255, 0.86);
+      --meta-bg: rgba(245, 250, 255, 0.9);
+      --shot-bg: #eaf1ff;
+      --label: #5f7cae;
       --high: #fecaca;
       --high-line: #dc2626;
       --med: #fde68a;
@@ -21,11 +29,29 @@
       --low-line: #2563eb;
     }
 
+    :root[data-theme="dark"] {
+      --bg: #0f172a;
+      --bg-glow: #1e293b;
+      --panel: #111827;
+      --panel-soft: #1f2937;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #60a5fa;
+      --border: #334155;
+      --toolbar-bg: rgba(15, 23, 42, 0.92);
+      --card-start: rgba(15, 23, 42, 0.95);
+      --card-end: rgba(30, 41, 59, 0.95);
+      --pill-bg: rgba(30, 41, 59, 0.75);
+      --meta-bg: rgba(17, 24, 39, 0.8);
+      --shot-bg: #0b1220;
+      --label: #94a3b8;
+    }
+
     * { box-sizing: border-box; }
     html, body { margin: 0; height: 100%; }
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: radial-gradient(1200px 800px at 20% -10%, #1e293b, var(--bg));
+      background: radial-gradient(1200px 800px at 20% -10%, var(--bg-glow), var(--bg));
       color: var(--text);
       overflow: hidden;
     }
@@ -38,7 +64,7 @@
       gap: 12px;
       padding: 10px 16px;
       border-bottom: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.92);
+      background: var(--toolbar-bg);
       backdrop-filter: blur(3px);
     }
 
@@ -76,7 +102,7 @@
       height: 100%;
       border: 1px solid var(--border);
       border-radius: 16px;
-      background: linear-gradient(160deg, rgba(15,23,42,0.95), rgba(30,41,59,0.95));
+      background: linear-gradient(160deg, var(--card-start), var(--card-end));
       box-shadow: 0 8px 24px rgba(2, 6, 23, 0.35);
       padding: 18px;
       overflow: hidden;
@@ -85,7 +111,7 @@
     .cover h1 { margin: 0 0 6px; font-size: 30px; }
     .cover .sub { margin: 0; color: var(--muted); }
     .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-    .pill { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; background: rgba(30,41,59,0.75); }
+    .pill { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; background: var(--pill-bg); }
     .list-wrap { margin-top: 14px; }
     .list-wrap ul { margin: 8px 0 0 18px; padding: 0; }
     .list-wrap li { margin: 4px 0; color: var(--muted); }
@@ -113,14 +139,14 @@
     .meta {
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: rgba(17, 24, 39, 0.8);
+      background: var(--meta-bg);
       padding: 12px;
       overflow: auto;
     }
     .meta h3 { margin: 0 0 8px; font-size: 17px; }
     .msg { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
     .line { margin: 7px 0; font-size: 13px; display: grid; gap: 3px; }
-    .line span { color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; }
+    .line span { color: var(--label); text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; }
     .line a { color: var(--accent); text-decoration: none; word-break: break-word; }
     .line strong { color: var(--text); }
     .line code { display: inline-block; max-width: 100%; overflow-wrap: anywhere; }
@@ -128,7 +154,7 @@
     .shot {
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: #0b1220;
+      background: var(--shot-bg);
       padding: 8px;
       display: flex;
       align-items: center;
@@ -175,7 +201,7 @@
       <section class="slide active">
         <div class="card cover">
           <h1>A11y Audit Slides - example.com</h1>
-          <p class="sub">Scanned at 2026-03-03T12:11:27.191Z | Mode: fast</p>
+          <p class="sub">Scanned at 2026-03-05T09:10:39.312Z | Mode: fast</p>
           <div class="stats">
             <div class="pill"><strong>Observations:</strong> 2</div>
             <div class="pill"><strong>Pages:</strong> 1</div>
@@ -240,6 +266,15 @@
   </div>
 
   <script>
+    (function applyThemeFromQuery() {
+      const theme = new URL(window.location.href).searchParams.get("theme");
+      if (theme === "light" || theme === "dark") {
+        document.documentElement.setAttribute("data-theme", theme);
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+
     const slides = Array.from(document.querySelectorAll(".slide"));
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");

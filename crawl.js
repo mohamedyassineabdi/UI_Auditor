@@ -531,31 +531,52 @@ function generateHtmlReport(report) {
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>A11y Audit Report - ${escapeHtml(report.domain || "")}</title>
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
+    :root {
+      --bg: #ffffff;
+      --text: #111827;
+      --muted: #667085;
+      --card: #ffffff;
+      --border: #e6e6e6;
+      --thead: #f8f8f8;
+      --code-bg: #f6f6f6;
+      --link: #0b57d0;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0b1324;
+      --text: #e7eefc;
+      --muted: #9bb0d1;
+      --card: #111d36;
+      --border: #304368;
+      --thead: #1a2b4a;
+      --code-bg: #172846;
+      --link: #85bbff;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: var(--text); background: var(--bg); }
     header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
     section { margin-top: 20px; }
     h1 { font-size: 20px; margin: 0; }
     h2 { font-size: 16px; margin: 0 0 8px; }
     .summary { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
-    .card { border: 1px solid #ddd; border-radius: 10px; padding: 10px 12px; min-width: 110px; }
-    .muted { color: #666; }
-    .count { color: #666; font-weight: normal; }
-    .issue { border: 1px solid #e6e6e6; border-radius: 10px; padding: 12px; margin: 10px 0; }
+    .card { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; min-width: 110px; background: var(--card); }
+    .muted { color: var(--muted); }
+    .count { color: var(--muted); font-weight: normal; }
+    .issue { border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 10px 0; background: var(--card); }
     .issue-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
     .badge { font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 999px; border: 1px solid #ccc; }
     .badge.high { border-color: #b91c1c; }
     .badge.medium { border-color: #b45309; }
     .badge.low { border-color: #1d4ed8; }
-    .rule { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #333; }
+    .rule { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: var(--muted); }
     .issue-msg { margin: 6px 0 10px; }
-    .meta { font-size: 13px; color: #222; display: grid; gap: 6px; }
-    .label { color: #666; }
-    code { background: #f6f6f6; padding: 2px 6px; border-radius: 6px; }
-    a { color: #0b57d0; text-decoration: none; }
+    .meta { font-size: 13px; color: var(--text); display: grid; gap: 6px; }
+    .label { color: var(--muted); }
+    code { background: var(--code-bg); padding: 2px 6px; border-radius: 6px; }
+    a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    table { width: 100%; border-collapse: collapse; border: 1px solid #e6e6e6; border-radius: 8px; overflow: hidden; }
-    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #efefef; vertical-align: top; font-size: 13px; }
-    th { background: #f8f8f8; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--card); }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 13px; }
+    th { background: var(--thead); font-weight: 600; }
     tr:last-child td { border-bottom: none; }
   </style>
 </head>
@@ -579,6 +600,16 @@ function generateHtmlReport(report) {
   ${renderSection("Medium severity", grouped.medium)}
   ${renderSection("Low severity", grouped.low)}
 
+  <script>
+    (function applyThemeFromQuery() {
+      const theme = new URL(window.location.href).searchParams.get("theme");
+      if (theme === "light" || theme === "dark") {
+        document.documentElement.setAttribute("data-theme", theme);
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
 </body>
 </html>`;
 }
@@ -642,13 +673,21 @@ function generateSlideViewerHtml(report) {
   <title>A11y Slide Viewer - ${escapeHtml(report.domain || "")}</title>
   <style>
     :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --panel-soft: #1f2937;
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-      --accent: #60a5fa;
-      --border: #334155;
+      --bg: #edf3ff;
+      --bg-glow: #dbe7ff;
+      --panel: #ffffff;
+      --panel-soft: #eaf1ff;
+      --text: #0f2145;
+      --muted: #4f6792;
+      --accent: #0b57d0;
+      --border: #c4d6f5;
+      --toolbar-bg: rgba(244, 248, 255, 0.92);
+      --card-start: rgba(255, 255, 255, 0.98);
+      --card-end: rgba(235, 243, 255, 0.98);
+      --pill-bg: rgba(236, 244, 255, 0.86);
+      --meta-bg: rgba(245, 250, 255, 0.9);
+      --shot-bg: #eaf1ff;
+      --label: #5f7cae;
       --high: #fecaca;
       --high-line: #dc2626;
       --med: #fde68a;
@@ -657,11 +696,29 @@ function generateSlideViewerHtml(report) {
       --low-line: #2563eb;
     }
 
+    :root[data-theme="dark"] {
+      --bg: #0f172a;
+      --bg-glow: #1e293b;
+      --panel: #111827;
+      --panel-soft: #1f2937;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #60a5fa;
+      --border: #334155;
+      --toolbar-bg: rgba(15, 23, 42, 0.92);
+      --card-start: rgba(15, 23, 42, 0.95);
+      --card-end: rgba(30, 41, 59, 0.95);
+      --pill-bg: rgba(30, 41, 59, 0.75);
+      --meta-bg: rgba(17, 24, 39, 0.8);
+      --shot-bg: #0b1220;
+      --label: #94a3b8;
+    }
+
     * { box-sizing: border-box; }
     html, body { margin: 0; height: 100%; }
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: radial-gradient(1200px 800px at 20% -10%, #1e293b, var(--bg));
+      background: radial-gradient(1200px 800px at 20% -10%, var(--bg-glow), var(--bg));
       color: var(--text);
       overflow: hidden;
     }
@@ -674,7 +731,7 @@ function generateSlideViewerHtml(report) {
       gap: 12px;
       padding: 10px 16px;
       border-bottom: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.92);
+      background: var(--toolbar-bg);
       backdrop-filter: blur(3px);
     }
 
@@ -712,7 +769,7 @@ function generateSlideViewerHtml(report) {
       height: 100%;
       border: 1px solid var(--border);
       border-radius: 16px;
-      background: linear-gradient(160deg, rgba(15,23,42,0.95), rgba(30,41,59,0.95));
+      background: linear-gradient(160deg, var(--card-start), var(--card-end));
       box-shadow: 0 8px 24px rgba(2, 6, 23, 0.35);
       padding: 18px;
       overflow: hidden;
@@ -721,7 +778,7 @@ function generateSlideViewerHtml(report) {
     .cover h1 { margin: 0 0 6px; font-size: 30px; }
     .cover .sub { margin: 0; color: var(--muted); }
     .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-    .pill { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; background: rgba(30,41,59,0.75); }
+    .pill { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; background: var(--pill-bg); }
     .list-wrap { margin-top: 14px; }
     .list-wrap ul { margin: 8px 0 0 18px; padding: 0; }
     .list-wrap li { margin: 4px 0; color: var(--muted); }
@@ -749,14 +806,14 @@ function generateSlideViewerHtml(report) {
     .meta {
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: rgba(17, 24, 39, 0.8);
+      background: var(--meta-bg);
       padding: 12px;
       overflow: auto;
     }
     .meta h3 { margin: 0 0 8px; font-size: 17px; }
     .msg { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
     .line { margin: 7px 0; font-size: 13px; display: grid; gap: 3px; }
-    .line span { color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; }
+    .line span { color: var(--label); text-transform: uppercase; letter-spacing: 0.05em; font-size: 11px; }
     .line a { color: var(--accent); text-decoration: none; word-break: break-word; }
     .line strong { color: var(--text); }
     .line code { display: inline-block; max-width: 100%; overflow-wrap: anywhere; }
@@ -764,7 +821,7 @@ function generateSlideViewerHtml(report) {
     .shot {
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: #0b1220;
+      background: var(--shot-bg);
       padding: 8px;
       display: flex;
       align-items: center;
@@ -835,6 +892,15 @@ function generateSlideViewerHtml(report) {
   </div>
 
   <script>
+    (function applyThemeFromQuery() {
+      const theme = new URL(window.location.href).searchParams.get("theme");
+      if (theme === "light" || theme === "dark") {
+        document.documentElement.setAttribute("data-theme", theme);
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+
     const slides = Array.from(document.querySelectorAll(".slide"));
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
@@ -938,6 +1004,193 @@ async function generateSlidesPdfFromHtml(slidesHtmlPath, pdfPath) {
     await browser.close();
   }
 }
+
+
+function normalizeTargetSelector(target) {
+  if (Array.isArray(target)) return target[0] || null;
+  return typeof target === "string" ? target : null;
+}
+
+async function getBoundingBoxForSelector(page, selector) {
+  if (!selector) return null;
+  try {
+    const locator = page.locator(selector).first();
+    const count = await locator.count();
+    if (!count) return null;
+    await locator.scrollIntoViewIfNeeded().catch(() => {});
+    const box = await locator.boundingBox();
+    if (!box || !isFinite(box.x) || !isFinite(box.y) || !isFinite(box.width) || !isFinite(box.height)) {
+      return null;
+    }
+    return {
+      x: Math.max(0, box.x),
+      y: Math.max(0, box.y),
+      width: Math.max(8, box.width),
+      height: Math.max(8, box.height),
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function buildCalloutsForViolation(page, violation) {
+  const callouts = [];
+  const seen = new Set();
+  for (const node of (violation.nodes || []).slice(0, 3)) {
+    const selector = normalizeTargetSelector(node.target);
+    if (!selector || seen.has(selector)) continue;
+    seen.add(selector);
+    const bbox = await getBoundingBoxForSelector(page, selector);
+    if (!bbox) continue;
+    callouts.push({
+      index: callouts.length + 1,
+      selector,
+      bbox,
+      explanation: node.failureSummary
+        ? compactText(node.failureSummary.split("\\n")[0])
+        : compactText(violation.help || violation.description || "Issue detected"),
+    });
+  }
+  return callouts;
+}
+
+function renderCalloutHeadline(issue) {
+  const msg = compactText(issue.message || "");
+  return truncateText(msg.replace(/\s+\([^)]+\)\s*$/, ""), 110);
+}
+
+function addAnnotatedScreenshot(slide, screenshotPath, imageBox, callouts, screenshotMeta) {
+  if (!screenshotPath || !fs.existsSync(screenshotPath)) {
+    slide.addShape(PptxGenJS.ShapeType.rect, {
+      x: imageBox.x,
+      y: imageBox.y,
+      w: imageBox.w,
+      h: imageBox.h,
+      fill: { color: "F3F4F6" },
+      line: { color: "D1D5DB", pt: 1, dash: "dash" },
+    });
+    slide.addText("No screenshot available", {
+      x: imageBox.x + 0.2,
+      y: imageBox.y + imageBox.h / 2 - 0.2,
+      w: imageBox.w - 0.4,
+      h: 0.4,
+      fontSize: 14,
+      color: "6B7280",
+      align: "center",
+    });
+    return;
+  }
+
+  slide.addImage({
+    path: screenshotPath,
+    x: imageBox.x,
+    y: imageBox.y,
+    w: imageBox.w,
+    h: imageBox.h,
+  });
+
+  const metaW = screenshotMeta?.width || 1280;
+  const metaH = screenshotMeta?.height || 720;
+
+  (callouts || []).slice(0, 3).forEach((callout, idx) => {
+    const b = callout?.bbox;
+    if (!b) return;
+    const x = imageBox.x + (b.x / metaW) * imageBox.w;
+    const y = imageBox.y + (b.y / metaH) * imageBox.h;
+    const w = Math.max(0.18, (b.width / metaW) * imageBox.w);
+    const h = Math.max(0.18, (b.height / metaH) * imageBox.h);
+
+    slide.addShape(PptxGenJS.ShapeType.roundRect, {
+      x,
+      y,
+      w,
+      h,
+      rectRadius: 0.02,
+      fill: { color: "FFFFFF", transparency: 100 },
+      line: { color: "E11D48", pt: 2.2 },
+    });
+
+    const cx = Math.max(imageBox.x + 0.05, x - 0.14);
+    const cy = Math.max(imageBox.y + 0.05, y - 0.14);
+    slide.addShape(PptxGenJS.ShapeType.ellipse, {
+      x: cx,
+      y: cy,
+      w: 0.34,
+      h: 0.34,
+      fill: { color: "DC2626" },
+      line: { color: "FFFFFF", pt: 1 },
+    });
+    slide.addText(String(idx + 1), {
+      x: cx,
+      y: cy + 0.015,
+      w: 0.34,
+      h: 0.2,
+      fontSize: 11,
+      bold: true,
+      color: "FFFFFF",
+      align: "center",
+      valign: "mid",
+    });
+  });
+}
+
+function addCalloutExplanationStrip(slide, callouts, box) {
+  const items = (callouts || []).slice(0, 3);
+  slide.addShape(PptxGenJS.ShapeType.roundRect, {
+    x: box.x,
+    y: box.y,
+    w: box.w,
+    h: box.h,
+    fill: { color: "FFFFFF" },
+    line: { color: "D9E2EC", pt: 1 },
+    radius: 0.05,
+  });
+
+  if (!items.length) {
+    slide.addText("No element-level highlight available for this finding.", {
+      x: box.x + 0.18,
+      y: box.y + 0.22,
+      w: box.w - 0.36,
+      h: 0.3,
+      fontSize: 10,
+      color: "475467",
+    });
+    return;
+  }
+
+  items.forEach((item, idx) => {
+    const yy = box.y + 0.12 + idx * 0.34;
+    slide.addShape(PptxGenJS.ShapeType.ellipse, {
+      x: box.x + 0.14,
+      y: yy,
+      w: 0.24,
+      h: 0.24,
+      fill: { color: "DC2626" },
+      line: { color: "FFFFFF", pt: 1 },
+    });
+    slide.addText(String(idx + 1), {
+      x: box.x + 0.14,
+      y: yy + 0.01,
+      w: 0.24,
+      h: 0.14,
+      fontSize: 8,
+      bold: true,
+      color: "FFFFFF",
+      align: "center",
+      valign: "mid",
+    });
+    slide.addText(truncateText(compactText(item.explanation || item.selector || "Issue area"), 120), {
+      x: box.x + 0.46,
+      y: yy - 0.005,
+      w: box.w - 0.58,
+      h: 0.22,
+      fontSize: 9,
+      color: "111827",
+      valign: "mid",
+    });
+  });
+}
+
 
 async function generatePowerPointReport(report, pptPath) {
   const observations = buildA11yObservations(report);
@@ -1297,6 +1550,7 @@ async function generatePowerPointReport(report, pptPath) {
     }
 
     const screenshotPath = issue.screenshot ? path.resolve(issue.screenshot) : null;
+    const callouts = Array.isArray(issue.callouts) ? issue.callouts : [];
     slide.addShape(pptx.ShapeType.roundRect, {
       x: 4.85,
       y: 0.82,
@@ -1307,43 +1561,27 @@ async function generatePowerPointReport(report, pptPath) {
       radius: 0.06,
     });
 
+    addAnnotatedScreenshot(
+      slide,
+      screenshotPath,
+      { x: 5.02, y: 1.02, w: 7.7, h: 5.12 },
+      callouts,
+      issue.screenshotMeta || { width: 1280, height: 720 }
+    );
+
+    addCalloutExplanationStrip(slide, callouts, { x: 5.02, y: 6.22, w: 7.7, h: 0.7 });
+
     if (screenshotPath && fs.existsSync(screenshotPath)) {
-      slide.addImage({
-        path: screenshotPath,
-        x: 5.02,
-        y: 1.02,
-        w: 7.7,
-        h: 5.78,
-      });
       slide.addText(path.basename(screenshotPath), {
         x: 5.02,
-        y: 6.86,
+        y: 6.94,
         w: 7.7,
-        h: 0.2,
-        fontSize: 9,
+        h: 0.16,
+        fontSize: 8,
         color: palette.muted,
         align: "right",
       });
-    } else {
-      slide.addShape(pptx.ShapeType.rect, {
-        x: 5.02,
-        y: 1.02,
-        w: 7.7,
-        h: 5.78,
-        fill: { color: "F3F4F6" },
-        line: { color: "D1D5DB", pt: 1, dash: "dash" },
-      });
-      slide.addText("No screenshot available for this observation", {
-        x: 5.22,
-        y: 3.78,
-        w: 7.3,
-        h: 0.5,
-        fontSize: 14,
-        color: "6B7280",
-        align: "center",
-      });
-    }
-  }
+    }  }
 
   await pptx.writeFile({ fileName: pptPath });
 }
@@ -1449,6 +1687,7 @@ async function generatePowerPointReport(report, pptPath) {
         const shotPath = path.join(SHOTS_DIR, shotName);
         await page.screenshot({ path: shotPath, fullPage: PAGE_SCREENSHOT_FULLPAGE });
         pageResult.screenshot = shotPath;
+        pageResult.screenshotMeta = { width: 1280, height: 720 };
       }
 
       try {
@@ -1473,6 +1712,7 @@ async function generatePowerPointReport(report, pptPath) {
         };
 
         for (const v of pageResult.a11y.violations) {
+          const callouts = await buildCalloutsForViolation(page, v);
           pageResult.issues.push({
             ruleId: `a11y:${v.id}`,
             severity: impactToSeverity(v.impact),
@@ -1480,8 +1720,10 @@ async function generatePowerPointReport(report, pptPath) {
             evidence: {
               url: pageResult.url,
               screenshot: pageResult.screenshot,
+              screenshotMeta: pageResult.screenshotMeta || { width: 1280, height: 720 },
               helpUrl: v.helpUrl,
               sampleTarget: v.nodes?.[0]?.target || null,
+              callouts,
             },
           });
         }
